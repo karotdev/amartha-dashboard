@@ -9,7 +9,12 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage",
+    "api:step1": "json-server --watch db-step1.json --port 4001",
+    "api:step2": "json-server --watch db-step2.json --port 4002",
+    "dev:api": "concurrently \"pnpm run api:step1\" \"pnpm run api:step2\"",
+    "dev:all": "concurrently \"pnpm run dev\" \"pnpm run dev:api\""
   },
   "dependencies": {
     "react": "^19.2.0",
