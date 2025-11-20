@@ -1,5 +1,22 @@
 .page-layout {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 16px;
+  background-color: var(--color-bg-card);
+  min-height: 100svh;
+}
+
+.page-layout__content {
+  padding: 0 16px 24px;
+  @media (min-width: 768px) {
+    padding: 0 24px 24px;
+    display: flex;
+    gap: 32px;
+    > * {
+      &:first-child {
+        flex-shrink: 0;
+        width: 280px;
+      }
+      &:last-child {
+        flex-grow: 1;
+      }
+    }
+  }
 }

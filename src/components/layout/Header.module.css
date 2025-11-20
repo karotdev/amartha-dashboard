@@ -1,9 +1,12 @@
 .header {
   align-items: center;
+  background-color: var(--color-bg-card);
   display: flex;
-  grid-column: span 2;
   justify-content: space-between;
-  padding: 16px 24px;
+  padding: 16px 48px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .header__title {
@@ -26,12 +29,16 @@
 .header-action__button {
   align-items: center;
   border-radius: 16px;
+  border: 1px solid transparent;
   display: flex;
   gap: 8px;
   padding: 8px;
-  transition: background-color 0.2s ease-in-out;
+  transition:
+    background-color 0.2s ease-in-out,
+    border-color 0.2s ease-in-out;
   &:hover {
     background-color: var(--color-bg-raised);
+    border-color: var(--color-border);
   }
 }
 
@@ -52,7 +59,7 @@
   @media (min-width: 768px) {
     display: block;
   }
-  color: var(--color-text-body);
+  color: var(--color-text-heading);
   font-weight: var(--font-weight-bold);
   letter-spacing: 0.5px;
 }

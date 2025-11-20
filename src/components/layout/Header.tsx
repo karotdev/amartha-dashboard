@@ -1,16 +1,17 @@
 import { Activity, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className={styles['header']}>
-      <a href="/">
+    <div className={styles['header']} data-testid="header">
+      <Link to="/">
         <h1 className={styles['header__title']}>
           Amartha<span>.</span>
         </h1>
-      </a>
+      </Link>
       <div className={styles['header-action']}>
         <button
           type="button"
@@ -24,9 +25,9 @@ const Header = () => {
           <div className={styles['header-action__menu']}>
             <ul>
               <li>
-                <a href="/">
+                <Link to="/logout">
                   <span>Logout</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

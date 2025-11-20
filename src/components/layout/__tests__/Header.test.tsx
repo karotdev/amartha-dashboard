@@ -1,34 +1,46 @@
-import { BrowserRouter } from 'react-router-dom';
 import { fireEvent, render } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import Header from '../Header';
 
 describe('Header', () => {
   it('should have title and action button', () => {
-    const { getByText } = render(<Header />);
+    const { getByText } = render(
+      <MemoryRouter>
+        <Header />
+      </MemoryRouter>,
+    );
     expect(getByText('Amartha')).toBeInTheDocument();
     expect(getByText('Hi, Fajar!')).toBeInTheDocument();
   });
 
-  it('should redirect to home page when title is clicked', () => {
+  it('should have correct href for title link', () => {
     const { getByText } = render(
-      <BrowserRouter>
+      <MemoryRouter>
         <Header />
-      </BrowserRouter>,
+      </MemoryRouter>,
     );
-    fireEvent.click(getByText('Amartha'));
-    expect(window.location.pathname).toBe('/');
+    const titleLink = getByText('Amartha').closest('a');
+    expect(titleLink).toHaveAttribute('href', '/');
   });
 
   it('should open menu when action button is clicked', () => {
-    const { getByText } = render(<Header />);
+    const { getByText } = render(
+      <MemoryRouter>
+        <Header />
+      </MemoryRouter>,
+    );
     fireEvent.click(getByText('Hi, Fajar!'));
     expect(getByText('Logout')).toBeInTheDocument();
   });
 
-  it('should redirect to logout page when logout link is clicked', () => {
-    const { getByText } = render(<Header />);
+  it('should have correct href for logout link', () => {
+    const { getByText } = render(
+      <MemoryRouter>
+        <Header />
+      </MemoryRouter>,
+    );
     fireEvent.click(getByText('Hi, Fajar!'));
-    fireEvent.click(getByText('Logout'));
-    expect(window.location.pathname).toBe('/');
+    const logoutLink = getByText('Logout').closest('a');
+    expect(logoutLink).toHaveAttribute('href', '/logout');
   });
 });
