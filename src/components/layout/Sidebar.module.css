@@ -1,0 +1,6 @@
+.sidebar {
+  width: 200px;
+  background-color: var(--color-bg-card);
+  border-radius: 16px;
+  padding: 16px;
+}
