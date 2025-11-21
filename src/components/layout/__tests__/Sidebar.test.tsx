@@ -41,27 +41,27 @@ describe('Sidebar', () => {
       </MemoryRouter>,
     );
     expect(getByText('Hi, Fajar!')).toBeInTheDocument();
-    expect(getByTestId('sidebar-profile-icon')).toBeInTheDocument();
-    expect(getByTestId('sidebar-logout-icon')).toBeInTheDocument();
+    expect(getByText('Profile')).toBeInTheDocument();
+    expect(getByText('Logout')).toBeInTheDocument();
   });
 
   it('should have correct href for profile link', () => {
-    const { getByTestId } = render(
+    const { getByText } = render(
       <MemoryRouter>
         <Sidebar />
       </MemoryRouter>,
     );
-    const profileLink = getByTestId('sidebar-profile-icon').closest('a');
+    const profileLink = getByText('Profile').closest('a');
     expect(profileLink).toHaveAttribute('href', '/profile');
   });
 
   it('should have correct href for logout link', () => {
-    const { getByTestId } = render(
+    const { getByText } = render(
       <MemoryRouter>
         <Sidebar />
       </MemoryRouter>,
     );
-    const logoutLink = getByTestId('sidebar-logout-icon').closest('a');
+    const logoutLink = getByText('Logout').closest('a');
     expect(logoutLink).toHaveAttribute('href', '/logout');
   });
 });

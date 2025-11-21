@@ -1,10 +1,25 @@
 import {
   ArrowLeftRightIcon,
   ChartNoAxesGanttIcon,
+  LogOutIcon,
   SettingsIcon,
+  UserIcon,
   UsersIcon,
 } from 'lucide-react';
-import type { RoleOption, SidebarItem, Step } from '../types';
+import type { HeaderMenu, RoleOption, SidebarItem, Step } from '../types';
+
+export const HEADER_MENU_ITEMS: HeaderMenu[] = [
+  {
+    label: 'Profile',
+    path: '/profile',
+    icon: <UserIcon size={20} />,
+  },
+  {
+    label: 'Logout',
+    path: '/logout',
+    icon: <LogOutIcon size={20} />,
+  },
+];
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
   {

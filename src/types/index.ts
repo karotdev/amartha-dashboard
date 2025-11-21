@@ -1,5 +1,11 @@
 import type { ReactNode } from 'react';
 
+export interface HeaderMenu {
+  label: string;
+  path: string;
+  icon: ReactNode;
+}
+
 export interface SidebarItem {
   label: string;
   value: string;

@@ -1,4 +1,5 @@
 import { Activity, useState } from 'react';
+import { HEADER_MENU_ITEMS } from '../../constants';
 import { Link } from 'react-router-dom';
 import Logo from './Logo';
 import styles from './Header.module.css';
@@ -23,11 +24,14 @@ const Header = () => {
         <Activity mode={isMenuOpen ? 'visible' : 'hidden'}>
           <div className={styles['header-action__menu']}>
             <ul>
-              <li>
-                <Link to="/logout">
-                  <span>Logout</span>
-                </Link>
-              </li>
+              {HEADER_MENU_ITEMS.map((item) => (
+                <li key={item.label}>
+                  <Link to={item.path}>
+                    {item.icon}
+                    <span>{item.label}</span>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </Activity>

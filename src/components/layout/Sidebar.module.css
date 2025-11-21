@@ -116,6 +116,9 @@
     height: 32px;
     justify-content: center;
     width: 32px;
+    span {
+      display: none;
+    }
   }
 }
 

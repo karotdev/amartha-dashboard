@@ -10,6 +10,7 @@ import {
   FormLayoutHeader,
 } from '../presentations/FormLayout';
 import { WIZARD_STEPS_OPS } from '../../../constants';
+import Button from '../../../components/ui/Button';
 
 const FormOps = () => {
   const { currentStep, completedSteps, handleStepClick, handleStepComplete } =
@@ -33,9 +34,9 @@ const FormOps = () => {
         <FormLayoutContent>
           <FieldDetail />
           <FormLayoutActions>
-            <button type="button" onClick={handleStepComplete}>
+            <Button type="submit" onClick={handleStepComplete}>
               Submit
-            </button>
+            </Button>
           </FormLayoutActions>
         </FormLayoutContent>
       </FormSection>

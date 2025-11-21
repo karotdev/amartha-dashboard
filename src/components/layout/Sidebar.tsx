@@ -1,7 +1,7 @@
-import { ArrowLeftIcon, LogOutIcon, MenuIcon, UserIcon } from 'lucide-react';
+import { ArrowLeftIcon, MenuIcon } from 'lucide-react';
 import { cn } from '../../utils/cn';
 import { Link } from 'react-router-dom';
-import { SIDEBAR_ITEMS } from '../../constants';
+import { HEADER_MENU_ITEMS, SIDEBAR_ITEMS } from '../../constants';
 import { useState } from 'react';
 import Logo from './Logo';
 import styles from './Sidebar.module.css';
@@ -54,12 +54,12 @@ const Sidebar = () => {
             <span className={styles['sidebar__profile-name']}>Hi, Fajar!</span>
           </div>
           <div className={styles['sidebar__actions']}>
-            <Link to="/profile">
-              <UserIcon size={20} data-testid="sidebar-profile-icon" />
-            </Link>
-            <Link to="/logout">
-              <LogOutIcon size={20} data-testid="sidebar-logout-icon" />
-            </Link>
+            {HEADER_MENU_ITEMS.map((item) => (
+              <Link key={item.label} to={item.path}>
+                {item.icon}
+                <span>{item.label}</span>
+              </Link>
+            ))}
           </div>
         </div>
       </div>

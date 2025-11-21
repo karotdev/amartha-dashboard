@@ -31,6 +31,7 @@ const Stepper = ({
 
         return (
           <button
+            type="button"
             key={step.id}
             className={styles['stepper__step']}
             disabled={!isAccessible}

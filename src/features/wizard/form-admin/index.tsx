@@ -12,6 +12,7 @@ import {
   FormLayoutHeader,
 } from '../presentations/FormLayout';
 import { WIZARD_STEPS_ADMIN } from '../../../constants';
+import Button from '../../../components/ui/Button';
 
 const FormAdmin = () => {
   const { currentStep, completedSteps, handleStepClick, handleStepComplete } =
@@ -36,9 +37,9 @@ const FormAdmin = () => {
           <FormLayoutContent>
             <FieldBasicInfo />
             <FormLayoutActions>
-              <button type="button" onClick={handleStepComplete}>
+              <Button type="button" onClick={handleStepComplete}>
                 Next
-              </button>
+              </Button>
             </FormLayoutActions>
           </FormLayoutContent>
         </FormSection>
@@ -48,9 +49,9 @@ const FormAdmin = () => {
           <FormLayoutContent>
             <FieldDetail />
             <FormLayoutActions>
-              <button type="button" onClick={handleStepComplete}>
+              <Button type="submit" onClick={handleStepComplete}>
                 Submit
-              </button>
+              </Button>
             </FormLayoutActions>
           </FormLayoutContent>
         </FormSection>

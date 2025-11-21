@@ -6,3 +6,28 @@
     gap: 32px;
   }
 }
+
+.employees-page__table {
+  border-radius: 16px;
+  border: 1px solid var(--color-border);
+}
+
+.employees-page__table-header {
+  background-color: var(--color-bg-raised);
+  display: grid;
+  font-weight: var(--font-weight-bold);
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  > * {
+    border-bottom: 1px solid var(--color-border);
+    padding: 16px;
+  }
+}
+
+.employees-page__table-body-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  > * {
+    border-bottom: 1px solid var(--color-border);
+    padding: 16px;
+  }
+}
