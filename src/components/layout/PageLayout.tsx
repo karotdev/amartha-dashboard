@@ -9,7 +9,12 @@ const PageLayout = ({ children }: PropsWithChildren<unknown>) => {
       <Header />
       <div className={styles['page-layout__content']}>
         <Sidebar />
-        <div data-testid="content">{children}</div>
+        <div
+          className={styles['page-layout__content-main']}
+          data-testid="content"
+        >
+          {children}
+        </div>
       </div>
     </div>
   );

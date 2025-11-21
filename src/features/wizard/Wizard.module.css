@@ -1,0 +1,45 @@
+/* need to create as component */
+.separator {
+  width: 100%;
+  border-bottom: none;
+  border-top: 1px solid var(--color-bg-raised);
+}
+
+.wizard-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  @media (min-width: 1024px) {
+    gap: 24px;
+  }
+}
+
+.wizard-page__title {
+  color: var(--color-text-heading);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+}
+
+.wizard-page__options {
+  display: flex;
+  gap: 16px;
+  & > * {
+    flex: 1;
+    max-width: 240px;
+  }
+}
+
+.wizard-page__content {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr;
+  @media (min-width: 1024px) {
+    grid-template-columns: 200px 1fr;
+  }
+}
+
+.wizard-page__content-title {
+  color: var(--color-text-heading);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+}

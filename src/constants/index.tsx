@@ -41,7 +41,7 @@ export const ROLES_OPTIONS: RoleOption[] = [
   },
   {
     label: 'Operations',
-    value: 'operations',
+    value: 'ops',
     description: 'Operations role with limited access to the system',
   },
 ];
