@@ -1,16 +1,22 @@
 .field-detail {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(min-content, 1fr);
   gap: 16px;
   @media (min-width: 1024px) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(min-content, 1fr) minmax(min-content, 1fr);
   }
 }
 
 .field-detail__photo {
-  grid-column: span 2;
+  grid-column: span 1;
+  @media (min-width: 1024px) {
+    grid-column: span 2;
+  }
 }
 
 .field-detail__notes {
-  grid-column: span 2;
+  grid-column: span 1;
+  @media (min-width: 1024px) {
+    grid-column: span 2;
+  }
 }

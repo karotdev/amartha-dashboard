@@ -1,9 +1,9 @@
 .form-section {
   display: grid;
   gap: 8px;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(min-content, 1fr);
   @media (min-width: 1024px) {
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: 200px minmax(min-content, 1fr);
   }
 }
 
