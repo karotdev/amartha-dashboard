@@ -1,10 +1,10 @@
-import styles from './Textfield.module.css';
 import { cn } from '../../utils/cn';
+import styles from './Textfield.module.css';
 
 interface TextfieldProps {
   className?: string;
-  label: string;
   id: string;
+  label: string;
   placeholder: string;
 }
 

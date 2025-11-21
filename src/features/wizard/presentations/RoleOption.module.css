@@ -1,11 +1,11 @@
 .role-option {
+  background-color: var(--color-bg-raised);
+  border-radius: 16px;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   padding: 16px;
-  border-radius: 16px;
-  cursor: pointer;
   transition: background-color 0.2s ease-in-out;
-  background-color: var(--color-bg-raised);
   input {
     display: none;
   }

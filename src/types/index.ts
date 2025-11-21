@@ -12,3 +12,9 @@ export interface RoleOption {
   value: 'admin' | 'ops';
   description: string;
 }
+
+export interface Step {
+  id: string;
+  label: string;
+  dataTestId?: string;
+}

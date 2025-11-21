@@ -1,10 +1,10 @@
 .sidebar__content {
   background-color: var(--color-accent-secondary);
-  z-index: 100;
   border-radius: 16px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  z-index: 100;
   @media (max-width: 1023px) {
     bottom: 0;
     left: 0;
@@ -120,15 +120,15 @@
 }
 
 .sidebar__menu-button {
-  position: absolute;
-  top: 18px;
-  right: 100%;
-  margin-right: 16px;
-  width: 32px;
-  height: 32px;
-  display: flex;
   align-items: center;
+  display: flex;
+  height: 32px;
   justify-content: center;
+  margin-right: 16px;
+  position: absolute;
+  right: 100%;
+  top: 18px;
+  width: 32px;
   @media (min-width: 1024px) {
     display: none;
   }

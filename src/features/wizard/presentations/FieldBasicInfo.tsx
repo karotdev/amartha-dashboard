@@ -1,5 +1,5 @@
-import Textfield from '../../../components/ui/Textfield';
 import styles from './FieldBasicInfo.module.css';
+import Textfield from '../../../components/ui/Textfield';
 
 const FieldBasicInfo = () => {
   return (

@@ -1,10 +1,10 @@
 import { ArrowLeftIcon, LogOutIcon, MenuIcon, UserIcon } from 'lucide-react';
+import { cn } from '../../utils/cn';
 import { Link } from 'react-router-dom';
 import { SIDEBAR_ITEMS } from '../../constants';
 import { useState } from 'react';
 import Logo from './Logo';
 import styles from './Sidebar.module.css';
-import { cn } from '../../utils/cn';
 
 const Sidebar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);

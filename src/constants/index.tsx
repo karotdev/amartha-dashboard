@@ -4,7 +4,7 @@ import {
   SettingsIcon,
   UsersIcon,
 } from 'lucide-react';
-import type { RoleOption, SidebarItem } from '../types';
+import type { RoleOption, SidebarItem, Step } from '../types';
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
   {
@@ -43,5 +43,22 @@ export const ROLES_OPTIONS: RoleOption[] = [
     label: 'Operations',
     value: 'ops',
     description: 'Operations role with limited access to the system',
+  },
+];
+
+export const WIZARD_STEPS_ADMIN: Step[] = [
+  {
+    id: 'basic-information',
+    label: 'Basic Information',
+    dataTestId: 'step-basic-information',
+  },
+  { id: 'details', label: 'Details', dataTestId: 'step-details' },
+];
+
+export const WIZARD_STEPS_OPS: Step[] = [
+  {
+    id: 'details',
+    label: 'Details',
+    dataTestId: 'step-details',
   },
 ];
