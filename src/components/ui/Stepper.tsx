@@ -1,11 +1,8 @@
+import { Activity } from 'react';
+import { CheckIcon } from 'lucide-react';
 import { cn } from '../../utils/cn';
 import styles from './Stepper.module.css';
-
-interface Step {
-  id: string;
-  label: string;
-  dataTestId: string;
-}
+import type { Step } from '../../types';
 
 interface StepperProps {
   completedSteps: Set<number>;
@@ -34,6 +31,7 @@ const Stepper = ({
 
         return (
           <button
+            type="button"
             key={step.id}
             className={styles['stepper__step']}
             disabled={!isAccessible}
@@ -46,10 +44,17 @@ const Stepper = ({
                 isCurrent ? styles['stepper__step-number--current'] : '',
               )}
             >
-              {index + 1}
+              <Activity mode={isCompleted ? 'hidden' : 'visible'}>
+                {index + 1}
+              </Activity>
+              <Activity mode={isCompleted ? 'visible' : 'hidden'}>
+                <CheckIcon
+                  size={16}
+                  data-testid="stepper-step-completed-icon"
+                />
+              </Activity>
             </span>
             <span>{step.label}</span>
-            {isCompleted && <span>✓</span>}
           </button>
         );
       })}

@@ -1,37 +1,45 @@
 .stepper {
   display: flex;
-  gap: 16px;
   flex-wrap: wrap;
+  gap: 16px;
 }
 
 .stepper__step {
-  padding: 4px;
-  font-weight: var(--font-weight-medium);
-  display: flex;
   align-items: center;
-  gap: 8px;
   border-radius: 10px;
-  &:hover {
-    &:not([disabled]) {
-      .stepper__step-number {
-        background-color: var(--color-accent-primary);
+  color: var(--color-text-heading);
+  display: flex;
+  font-weight: var(--font-weight-medium);
+  gap: 8px;
+  padding: 4px;
+  @media (min-width: 1024px) {
+    &:hover {
+      &:not([disabled]) {
+        .stepper__step-number {
+          transition:
+            background-color 0.2s ease-in-out,
+            color 0.2s ease-in-out;
+          background-color: var(--color-accent-primary);
+          color: var(--color-bg-base);
+        }
       }
     }
   }
 }
 
 .stepper__step-number {
-  display: flex;
   align-items: center;
+  background-color: var(--color-bg-raised);
+  border-radius: 10px;
+  color: var(--color-text-heading);
+  display: flex;
+  font-weight: var(--font-weight-medium);
+  height: 32px;
   justify-content: center;
   width: 32px;
-  height: 32px;
-  border-radius: 10px;
-  background-color: var(--color-bg-raised);
-  font-weight: var(--font-weight-medium);
-  transition: background-color 0.2s ease-in-out;
 }
 
 .stepper__step-number--current {
   background-color: var(--color-accent-primary);
+  color: var(--color-bg-base);
 }

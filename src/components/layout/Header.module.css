@@ -27,10 +27,10 @@
   display: flex;
   gap: 8px;
   padding: 8px;
-  transition:
-    background-color 0.2s ease-in-out,
-    border-color 0.2s ease-in-out;
   &:hover {
+    transition:
+      background-color 0.2s ease-in-out,
+      border-color 0.2s ease-in-out;
     background-color: var(--color-bg-raised);
     border-color: var(--color-border);
   }
@@ -66,12 +66,14 @@
   top: 100%;
   width: 200px;
   a {
+    align-items: center;
     border-radius: 16px;
-    display: block;
+    display: flex;
     font-weight: var(--font-weight-bold);
+    gap: 8px;
     padding: 8px 16px;
-    transition: background-color 0.2s ease-in-out;
     &:hover {
+      transition: background-color 0.2s ease-in-out;
       background-color: var(--color-bg-raised);
     }
   }

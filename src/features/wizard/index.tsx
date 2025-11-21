@@ -4,11 +4,11 @@ import { useSearchParams } from 'react-router-dom';
 import FormAdmin from './form-admin';
 import FormOps from './form-ops';
 import FormSection from './presentations/FormSection';
+import FormTitle from './presentations/FormTitle';
 import PageLayout from '../../components/layout/PageLayout';
 import RoleOption from './presentations/RoleOption';
-import styles from './Wizard.module.css';
-import FormTitle from './presentations/FormTitle';
 import Separator from '../../components/ui/Separator';
+import styles from './Wizard.module.css';
 
 const WizardPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();

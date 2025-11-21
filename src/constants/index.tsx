@@ -1,10 +1,25 @@
 import {
   ArrowLeftRightIcon,
   ChartNoAxesGanttIcon,
+  LogOutIcon,
   SettingsIcon,
+  UserIcon,
   UsersIcon,
 } from 'lucide-react';
-import type { RoleOption, SidebarItem } from '../types';
+import type { HeaderMenu, RoleOption, SidebarItem, Step } from '../types';
+
+export const HEADER_MENU_ITEMS: HeaderMenu[] = [
+  {
+    label: 'Profile',
+    path: '/profile',
+    icon: <UserIcon size={20} />,
+  },
+  {
+    label: 'Logout',
+    path: '/logout',
+    icon: <LogOutIcon size={20} />,
+  },
+];
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
   {
@@ -43,5 +58,22 @@ export const ROLES_OPTIONS: RoleOption[] = [
     label: 'Operations',
     value: 'ops',
     description: 'Operations role with limited access to the system',
+  },
+];
+
+export const WIZARD_STEPS_ADMIN: Step[] = [
+  {
+    id: 'basic-information',
+    label: 'Basic Information',
+    dataTestId: 'step-basic-information',
+  },
+  { id: 'details', label: 'Details', dataTestId: 'step-details' },
+];
+
+export const WIZARD_STEPS_OPS: Step[] = [
+  {
+    id: 'details',
+    label: 'Details',
+    dataTestId: 'step-details',
   },
 ];

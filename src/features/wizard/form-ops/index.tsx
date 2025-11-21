@@ -1,47 +1,46 @@
-import Stepper from '../../../components/ui/Stepper';
 import { useStepper } from '../../../hooks/use-stepper';
 import FieldDetail from '../presentations/FieldDetail';
 import FormSection from '../presentations/FormSection';
 import FormTitle from '../presentations/FormTitle';
-import styles from './FormOps.module.css';
+import Stepper from '../../../components/ui/Stepper';
+import {
+  FormLayout,
+  FormLayoutActions,
+  FormLayoutContent,
+  FormLayoutHeader,
+} from '../presentations/FormLayout';
+import { WIZARD_STEPS_OPS } from '../../../constants';
+import Button from '../../../components/ui/Button';
 
 const FormOps = () => {
-  const steps = [
-    {
-      id: 'details',
-      label: 'Details',
-      dataTestId: 'step-details',
-    },
-  ];
-
   const { currentStep, completedSteps, handleStepClick, handleStepComplete } =
-    useStepper(steps);
+    useStepper(WIZARD_STEPS_OPS);
 
   return (
-    <div className={styles['form-ops']}>
-      <div className={styles['form-ops__header']}>
+    <FormLayout>
+      <FormLayoutHeader>
         <FormTitle
           title="Create Account"
           description="Create your account by completing the necessary steps"
         />
         <Stepper
-          steps={steps}
+          steps={WIZARD_STEPS_OPS}
           currentStep={currentStep}
           completedSteps={completedSteps}
           onStepClick={handleStepClick}
         />
-      </div>
+      </FormLayoutHeader>
       <FormSection title="Details">
-        <div className={styles['form-ops__content']}>
+        <FormLayoutContent>
           <FieldDetail />
-          <div className={styles['form-ops__content-actions']}>
-            <button type="button" onClick={handleStepComplete}>
+          <FormLayoutActions>
+            <Button type="submit" onClick={handleStepComplete}>
               Submit
-            </button>
-          </div>
-        </div>
+            </Button>
+          </FormLayoutActions>
+        </FormLayoutContent>
       </FormSection>
-    </div>
+    </FormLayout>
   );
 };
 

@@ -1,6 +1,6 @@
+import { MemoryRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
 import FormAdmin from '..';
-import { MemoryRouter } from 'react-router-dom';
 
 describe('FormAdmin', () => {
   it('should have steps', () => {

@@ -1,64 +1,62 @@
 import { Activity } from 'react';
-import Stepper from '../../../components/ui/Stepper';
 import { useStepper } from '../../../hooks/use-stepper';
-import FormTitle from '../presentations/FormTitle';
-import styles from './FormAdmin.module.css';
 import FieldBasicInfo from '../presentations/FieldBasicInfo';
-import FormSection from '../presentations/FormSection';
 import FieldDetail from '../presentations/FieldDetail';
+import FormSection from '../presentations/FormSection';
+import FormTitle from '../presentations/FormTitle';
+import Stepper from '../../../components/ui/Stepper';
+import {
+  FormLayout,
+  FormLayoutActions,
+  FormLayoutContent,
+  FormLayoutHeader,
+} from '../presentations/FormLayout';
+import { WIZARD_STEPS_ADMIN } from '../../../constants';
+import Button from '../../../components/ui/Button';
 
 const FormAdmin = () => {
-  const steps = [
-    {
-      id: 'basic-information',
-      label: 'Basic Information',
-      dataTestId: 'step-basic-information',
-    },
-    { id: 'details', label: 'Details', dataTestId: 'step-details' },
-  ];
-
   const { currentStep, completedSteps, handleStepClick, handleStepComplete } =
-    useStepper(steps);
+    useStepper(WIZARD_STEPS_ADMIN);
 
   return (
-    <div className={styles['form-admin']}>
-      <div className={styles['form-admin__header']}>
+    <FormLayout>
+      <FormLayoutHeader>
         <FormTitle
           title="Create Account"
           description="Create your account by completing the necessary steps"
         />
         <Stepper
-          steps={steps}
+          steps={WIZARD_STEPS_ADMIN}
           currentStep={currentStep}
           completedSteps={completedSteps}
           onStepClick={handleStepClick}
         />
-      </div>
+      </FormLayoutHeader>
       <Activity mode={currentStep === 0 ? 'visible' : 'hidden'}>
         <FormSection title="Basic Information">
-          <div className={styles['form-admin__content']}>
+          <FormLayoutContent>
             <FieldBasicInfo />
-            <div className={styles['form-admin__content-actions']}>
-              <button type="button" onClick={handleStepComplete}>
+            <FormLayoutActions>
+              <Button type="button" onClick={handleStepComplete}>
                 Next
-              </button>
-            </div>
-          </div>
+              </Button>
+            </FormLayoutActions>
+          </FormLayoutContent>
         </FormSection>
       </Activity>
       <Activity mode={currentStep === 1 ? 'visible' : 'hidden'}>
         <FormSection title="Details">
-          <div className={styles['form-admin__content']}>
+          <FormLayoutContent>
             <FieldDetail />
-            <div className={styles['form-admin__content-actions']}>
-              <button type="button" onClick={handleStepComplete}>
+            <FormLayoutActions>
+              <Button type="submit" onClick={handleStepComplete}>
                 Submit
-              </button>
-            </div>
-          </div>
+              </Button>
+            </FormLayoutActions>
+          </FormLayoutContent>
         </FormSection>
       </Activity>
-    </div>
+    </FormLayout>
   );
 };
 

@@ -1,13 +1,15 @@
-import { ArrowLeftIcon, LogOutIcon, MenuIcon, UserIcon } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { SIDEBAR_ITEMS } from '../../constants';
+import { ArrowLeftIcon, MenuIcon } from 'lucide-react';
+import { cn } from '../../utils/cn';
+import { HEADER_MENU_ITEMS, SIDEBAR_ITEMS } from '../../constants';
+import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import Logo from './Logo';
 import styles from './Sidebar.module.css';
-import { cn } from '../../utils/cn';
 
 const Sidebar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const location = useLocation();
+  const isActive = (path: string) => location.pathname === path;
 
   return (
     <div className={styles['sidebar']} data-testid="sidebar">
@@ -39,7 +41,14 @@ const Sidebar = () => {
             <ul>
               {SIDEBAR_ITEMS.map((item) => (
                 <li key={item.value}>
-                  <Link to={item.path}>
+                  <Link
+                    to={item.path}
+                    className={
+                      isActive(item.path)
+                        ? styles['sidebar__nav-item--active']
+                        : ''
+                    }
+                  >
                     {item.icon}
                     <span>{item.label}</span>
                   </Link>
@@ -54,12 +63,12 @@ const Sidebar = () => {
             <span className={styles['sidebar__profile-name']}>Hi, Fajar!</span>
           </div>
           <div className={styles['sidebar__actions']}>
-            <Link to="/profile">
-              <UserIcon size={20} data-testid="sidebar-profile-icon" />
-            </Link>
-            <Link to="/logout">
-              <LogOutIcon size={20} data-testid="sidebar-logout-icon" />
-            </Link>
+            {HEADER_MENU_ITEMS.map((item) => (
+              <Link key={item.label} to={item.path}>
+                {item.icon}
+                <span>{item.label}</span>
+              </Link>
+            ))}
           </div>
         </div>
       </div>

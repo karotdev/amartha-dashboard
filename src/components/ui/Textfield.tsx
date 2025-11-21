@@ -1,18 +1,22 @@
-import styles from './Textfield.module.css';
 import { cn } from '../../utils/cn';
+import styles from './Textfield.module.css';
+import type { InputHTMLAttributes } from 'react';
 
-interface TextfieldProps {
-  className?: string;
+interface TextfieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  id: string;
-  placeholder: string;
 }
 
-const Textfield = ({ className, label, id, placeholder }: TextfieldProps) => {
+const Textfield = ({
+  className,
+  label,
+  id,
+  placeholder,
+  ...props
+}: TextfieldProps) => {
   return (
     <div className={cn(styles['textfield'], className ?? '')}>
       <label htmlFor={id}>{label}</label>
-      <input type="text" id={id} placeholder={placeholder} />
+      <input type="text" id={id} placeholder={placeholder} {...props} />
     </div>
   );
 };

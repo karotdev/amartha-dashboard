@@ -30,19 +30,16 @@ export const useStepper = (steps: Step[]): UseStepperReturn => {
   };
 
   const handleStepComplete = () => {
-    if (!completedSteps.has(currentStep)) {
-      const newCompletedSteps = new Set(completedSteps);
-      newCompletedSteps.add(currentStep);
-      const newParams = new URLSearchParams(searchParams);
-      newParams.set('completed', Array.from(newCompletedSteps).join(','));
+    const newCompletedSteps = new Set(completedSteps);
+    newCompletedSteps.add(currentStep);
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set('completed', Array.from(newCompletedSteps).join(','));
 
-      // Move to next step if available
-      if (currentStep < steps.length - 1) {
-        newParams.set('step', (currentStep + 1).toString());
-      }
-
-      setSearchParams(newParams);
+    if (currentStep < steps.length - 1) {
+      newParams.set('step', (currentStep + 1).toString());
     }
+
+    setSearchParams(newParams);
   };
 
   return {
