@@ -29,7 +29,7 @@ const RoleOption = ({
     >
       <input id={id} type="radio" checked={checked} onChange={onChange} />
       <span className={styles['role-option__label']}>{label}</span>
-      <span className={styles['role-option__description']}>{description}</span>
+      <span>{description}</span>
     </label>
   );
 };

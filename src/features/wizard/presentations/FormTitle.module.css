@@ -1,0 +1,5 @@
+.form-title__title {
+  color: var(--color-text-heading);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+}

@@ -1,28 +1,31 @@
-import { Activity, useState } from 'react';
+import { Activity } from 'react';
 import { ROLES_OPTIONS } from '../../constants';
+import { useSearchParams } from 'react-router-dom';
 import FormAdmin from './form-admin';
 import FormOps from './form-ops';
+import FormSection from './presentations/FormSection';
 import PageLayout from '../../components/layout/PageLayout';
 import RoleOption from './presentations/RoleOption';
 import styles from './Wizard.module.css';
+import FormTitle from './presentations/FormTitle';
 import Separator from '../../components/ui/Separator';
 
 const WizardPage = () => {
-  const [selectedRole, setSelectedRole] = useState<'admin' | 'ops' | null>(
-    null,
-  );
+  const [searchParams, setSearchParams] = useSearchParams();
+  const selectedRole = searchParams.get('role') as 'admin' | 'ops' | null;
+
+  const handleRoleChange = (role: 'admin' | 'ops') => {
+    setSearchParams({ role });
+  };
 
   return (
     <PageLayout>
       <div className={styles['wizard-page']}>
-        <div className={styles['wizard-page__header']}>
-          <p className={styles['wizard-page__title']}>Create account</p>
-          <p className={styles['wizard-page__description']}>
-            Choose role to get started
-          </p>
-        </div>
-        <div className={styles['wizard-page__content']}>
-          <p className={styles['wizard-page__content-title']}>Role</p>
+        <FormTitle
+          title="Account Wizard"
+          description="Choose role to get started"
+        />
+        <FormSection title="Role">
           <div className={styles['wizard-page__options']}>
             {ROLES_OPTIONS.map((role) => (
               <RoleOption
@@ -31,12 +34,12 @@ const WizardPage = () => {
                 id={role.value}
                 label={role.label}
                 description={role.description}
-                onChange={() => setSelectedRole(role.value)}
+                onChange={() => handleRoleChange(role.value)}
                 dataTestId={`custom-radio-${role.value}`}
               />
             ))}
           </div>
-        </div>
+        </FormSection>
         <Separator />
         <Activity mode={selectedRole === 'admin' ? 'visible' : 'hidden'}>
           <FormAdmin />

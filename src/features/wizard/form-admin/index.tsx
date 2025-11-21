@@ -1,72 +1,51 @@
-import { cn } from '../../../utils/cn';
-import Separator from '../../../components/ui/Separator';
+import { Activity } from 'react';
+import Stepper from '../../../components/ui/Stepper';
+import { useStepper } from '../../../hooks/use-stepper';
+import FormTitle from '../presentations/FormTitle';
 import styles from './FormAdmin.module.css';
+import FieldBasicInfo from '../presentations/FieldBasicInfo';
+import FormSection from '../presentations/FormSection';
 
 const FormAdmin = () => {
+  const steps = [
+    { id: 'basic-information', label: 'Basic Information' },
+    { id: 'details', label: 'Details' },
+  ];
+
+  const { currentStep, completedSteps, handleStepClick, handleStepComplete } =
+    useStepper(steps);
+
   return (
-    <>
-      <div className={styles['form-basic-container']}>
-        <p className={styles['form-basic__title']}>Basic Information</p>
-        <div className={styles['form-basic']}>
-          <div className={styles['form-basic__field']}>
-            <label htmlFor="employee-id">Employee ID</label>
-            <input
-              type="text"
-              id="employee-id"
-              placeholder="Enter employee ID"
-            />
-          </div>
-          <div className={styles['form-basic__field']}>
-            <label htmlFor="full-name">Full Name</label>
-            <input type="text" id="full-name" placeholder="Enter full name" />
-          </div>
-          <div className={styles['form-basic__field']}>
-            <label htmlFor="email">Email</label>
-            <input type="email" id="email" placeholder="Enter email" />
-          </div>
-          <div className={styles['form-basic__field']}>
-            <label htmlFor="department">Department</label>
-            <input type="text" id="department" placeholder="Enter department" />
-          </div>
-          <div className={styles['form-basic__field']}>
-            <label htmlFor="role">Role</label>
-            <input type="text" id="role" placeholder="Enter role" />
-          </div>
-        </div>
+    <div className={styles['form-admin']}>
+      <div className={styles['form-admin__header']}>
+        <FormTitle
+          title="Create Account"
+          description="Create your account by completing the necessary steps"
+        />
+        <Stepper
+          steps={steps}
+          currentStep={currentStep}
+          completedSteps={completedSteps}
+          onStepClick={handleStepClick}
+        />
       </div>
-      <Separator />
-      <div className={styles['form-detail-container']}>
-        <p className={styles['form-detail__title']}>Details</p>
-        <div className={styles['form-detail']}>
-          <div
-            className={cn(
-              styles['form-detail__field'],
-              styles['form-detail__field-full-width'],
-            )}
-          >
-            <label htmlFor="photo">Photo</label>
-            <input type="file" id="photo" />
+      <div>
+        <Activity mode={currentStep === 0 ? 'visible' : 'hidden'}>
+          <div>
+            <FormSection title="Basic Information">
+              <FieldBasicInfo />
+            </FormSection>
+            <button onClick={handleStepComplete}>Mark as Complete</button>
           </div>
-          <div className={styles['form-detail__field']}>
-            <label htmlFor="employment-type">Employment Type</label>
-            <input type="text" id="employment-type" />
+        </Activity>
+        <Activity mode={currentStep === 1 ? 'visible' : 'hidden'}>
+          <div>
+            <div>Details Content</div>
+            <button onClick={handleStepComplete}>Mark as Complete</button>
           </div>
-          <div className={styles['form-detail__field']}>
-            <label htmlFor="office-location">Office Location</label>
-            <input type="text" id="office-location" />
-          </div>
-          <div
-            className={cn(
-              styles['form-detail__field'],
-              styles['form-detail__field-full-width'],
-            )}
-          >
-            <label htmlFor="notes">Notes</label>
-            <textarea id="notes" />
-          </div>
-        </div>
+        </Activity>
       </div>
-    </>
+    </div>
   );
 };
 

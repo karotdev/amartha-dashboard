@@ -4,7 +4,7 @@
   padding: 16px;
   border-radius: 16px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.2s ease-in-out;
   background-color: var(--color-bg-raised);
   input {
     display: none;
@@ -24,9 +24,4 @@
   color: var(--color-text-heading);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-medium);
-}
-
-.role-option__description {
-  color: var(--color-text-body);
-  font-size: var(--font-size-sm);
 }

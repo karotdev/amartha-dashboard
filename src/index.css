@@ -167,7 +167,7 @@ table {
   --color-text-body: hsl(0, 0%, 25%);
   --color-text-placeholder: hsl(0, 0%, 50%);
 
-  --color-border: hsl(0, 0%, 85%);
+  --color-border: hsl(0, 0%, 90%);
   --color-highlight: hsl(0, 0%, 100%);
 
   --color-primary: oklch(0.55 0.22 280);
