@@ -1,5 +1,7 @@
 import Stepper from '../../../components/ui/Stepper';
 import { useStepper } from '../../../hooks/use-stepper';
+import FieldDetail from '../presentations/FieldDetail';
+import FormSection from '../presentations/FormSection';
 import FormTitle from '../presentations/FormTitle';
 import styles from './FormOps.module.css';
 
@@ -12,7 +14,8 @@ const FormOps = () => {
     },
   ];
 
-  const { currentStep, completedSteps, handleStepClick } = useStepper(steps);
+  const { currentStep, completedSteps, handleStepClick, handleStepComplete } =
+    useStepper(steps);
 
   return (
     <div className={styles['form-ops']}>
@@ -28,6 +31,16 @@ const FormOps = () => {
           onStepClick={handleStepClick}
         />
       </div>
+      <FormSection title="Details">
+        <div className={styles['form-ops__content']}>
+          <FieldDetail />
+          <div className={styles['form-ops__content-actions']}>
+            <button type="button" onClick={handleStepComplete}>
+              Submit
+            </button>
+          </div>
+        </div>
+      </FormSection>
     </div>
   );
 };
