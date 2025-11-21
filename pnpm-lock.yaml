@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      lucide-react:
+        specifier: ^0.554.0
+        version: 0.554.0(react@19.2.0)
       react:
         specifier: ^19.2.0
         version: 19.2.0
@@ -66,6 +69,9 @@ importers:
       json-server:
         specifier: 0.17.4
         version: 0.17.4
+      prettier:
+        specifier: ^3.6.2
+        version: 3.6.2
       typescript:
         specifier: ~5.9.3
         version: 5.9.3
@@ -1390,6 +1396,11 @@ packages:
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
 
+  lucide-react@0.554.0:
+    resolution: {integrity: sha512-St+z29uthEJVx0Is7ellNkgTEhaeSoA42I7JjOCBCrc5X6LYMGSv0P/2uS5HDLTExP5tpiqRD2PyUEOS6s9UXA==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
   lz-string@1.5.0:
     resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}
     hasBin: true
@@ -1577,6 +1588,11 @@ packages:
   prelude-ls@1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
+
+  prettier@3.6.2:
+    resolution: {integrity: sha512-I7AIg5boAr5R0FFtJ6rCfD+LFsWHp81dolrFD8S79U9tb8Az2nGrJncnMSnys+bpQJfRUzqs9hnA81OAA3hCuQ==}
+    engines: {node: '>=14'}
+    hasBin: true
 
   pretty-format@27.5.1:
     resolution: {integrity: sha512-Qb1gy5OrP5+zDf2Bvnzdl3jsTf1qXVMazbvCoKhtKqVs4/YK4ozX4gKQJJVyNe+cajNPn0KoC0MC3FUmaHWEmQ==}
@@ -3402,6 +3418,10 @@ snapshots:
     dependencies:
       yallist: 3.1.1
 
+  lucide-react@0.554.0(react@19.2.0):
+    dependencies:
+      react: 19.2.0
+
   lz-string@1.5.0: {}
 
   magic-string@0.30.21:
@@ -3554,6 +3574,8 @@ snapshots:
       source-map-js: 1.2.1
 
   prelude-ls@1.2.1: {}
+
+  prettier@3.6.2: {}
 
   pretty-format@27.5.1:
     dependencies:
