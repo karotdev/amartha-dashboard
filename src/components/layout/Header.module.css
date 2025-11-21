@@ -3,27 +3,21 @@
   background-color: var(--color-bg-card);
   display: flex;
   justify-content: space-between;
-  padding: 16px 48px;
+  padding: 16px;
   position: sticky;
   top: 0;
   z-index: 100;
-}
-
-.header__title {
-  color: var(--color-text-heading);
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: 0.5px;
-  user-select: none;
-  span {
-    color: var(--color-accent-primary);
-    font-size: 36px;
-    line-height: 27px;
+  @media (min-width: 1024px) {
+    padding: 16px 48px;
   }
 }
 
 .header-action {
+  display: none;
   position: relative;
+  @media (min-width: 1024px) {
+    display: block;
+  }
 }
 
 .header-action__button {
@@ -55,10 +49,6 @@
 }
 
 .header-action__name {
-  display: none;
-  @media (min-width: 768px) {
-    display: block;
-  }
   color: var(--color-text-heading);
   font-weight: var(--font-weight-bold);
   letter-spacing: 0.5px;

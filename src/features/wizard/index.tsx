@@ -7,7 +7,9 @@ const WizardPage = () => {
   const [selectedRole, setSelectedRole] = useState<string | null>(null);
   return (
     <PageLayout>
-      <div>WizardPage</div>
+      <div style={{ height: '10000px', backgroundColor: '#abcdef' }}>
+        WizardPage
+      </div>
       <div style={{ display: 'flex', gap: '16px' }}>
         {ROLES_OPTIONS.map((role) => (
           <RoleOption

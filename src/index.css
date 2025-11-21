@@ -166,6 +166,7 @@ table {
 
   --color-accent-primary: oklch(0.75 0.12 285);
   --color-accent-secondary: oklch(0.98 0.1 285);
+  --color-accent-tertiary: oklch(0.95 0.1 285);
 
   --gradient-bg: linear-gradient(
     to bottom,
