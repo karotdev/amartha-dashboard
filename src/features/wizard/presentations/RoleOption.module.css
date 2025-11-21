@@ -5,23 +5,37 @@
   display: flex;
   flex-direction: column;
   padding: 16px;
-  transition: background-color 0.2s ease-in-out;
   input {
     display: none;
   }
   @media (min-width: 1024px) {
     &:hover {
+      transition:
+        background-color 0.2s ease-in-out,
+        color 0.2s ease-in-out;
       background-color: var(--color-accent-primary);
+      color: var(--color-bg-base);
     }
   }
-}
-
-.role-option--checked {
-  background-color: var(--color-accent-primary);
 }
 
 .role-option__label {
   color: var(--color-text-heading);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-medium);
+}
+
+.role-option:hover .role-option__label {
+  @media (min-width: 1024px) {
+    transition: color 0.2s ease-in-out;
+    color: var(--color-bg-base);
+  }
+}
+
+.role-option--checked {
+  background-color: var(--color-accent-primary);
+  color: var(--color-bg-base);
+  .role-option__label {
+    color: var(--color-bg-base);
+  }
 }

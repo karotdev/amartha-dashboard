@@ -27,10 +27,10 @@
   display: flex;
   gap: 8px;
   padding: 8px;
-  transition:
-    background-color 0.2s ease-in-out,
-    border-color 0.2s ease-in-out;
   &:hover {
+    transition:
+      background-color 0.2s ease-in-out,
+      border-color 0.2s ease-in-out;
     background-color: var(--color-bg-raised);
     border-color: var(--color-border);
   }
@@ -72,8 +72,8 @@
     font-weight: var(--font-weight-bold);
     gap: 8px;
     padding: 8px 16px;
-    transition: background-color 0.2s ease-in-out;
     &:hover {
+      transition: background-color 0.2s ease-in-out;
       background-color: var(--color-bg-raised);
     }
   }

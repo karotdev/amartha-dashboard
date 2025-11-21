@@ -3,17 +3,21 @@
   background-color: var(--color-accent-primary);
   border-radius: 16px;
   border: none;
+  color: var(--color-bg-base);
   cursor: pointer;
   display: flex;
   font-weight: var(--font-weight-medium);
   gap: 8px;
   justify-content: center;
   padding: 12px 16px;
-  transition: background-color 0.2s ease-in-out;
   width: 200px;
   @media (min-width: 1024px) {
     &:hover {
+      transition:
+        background-color 0.2s ease-in-out,
+        color 0.2s ease-in-out;
       background-color: var(--color-accent-tertiary);
+      color: var(--color-text-body);
     }
   }
 }

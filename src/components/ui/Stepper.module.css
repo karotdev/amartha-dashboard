@@ -16,7 +16,11 @@
     &:hover {
       &:not([disabled]) {
         .stepper__step-number {
+          transition:
+            background-color 0.2s ease-in-out,
+            color 0.2s ease-in-out;
           background-color: var(--color-accent-primary);
+          color: var(--color-bg-base);
         }
       }
     }
@@ -32,10 +36,10 @@
   font-weight: var(--font-weight-medium);
   height: 32px;
   justify-content: center;
-  transition: background-color 0.2s ease-in-out;
   width: 32px;
 }
 
 .stepper__step-number--current {
   background-color: var(--color-accent-primary);
+  color: var(--color-bg-base);
 }

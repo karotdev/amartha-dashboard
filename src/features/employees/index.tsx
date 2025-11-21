@@ -2,21 +2,26 @@ import { PlusIcon } from 'lucide-react';
 import FormTitle from '../wizard/presentations/FormTitle';
 import PageLayout from '../../components/layout/PageLayout';
 import styles from './Employees.module.css';
-import Button from '../../components/ui/Button';
+import { Link } from 'react-router-dom';
 
 const EmployeesPage = () => {
   return (
     <PageLayout>
       <div className={styles['employees-page']}>
         <FormTitle title="Employees" description="Manage your employees" />
-        <div>
-          <Button type="button">
-            <PlusIcon />
-            Add Employee
-          </Button>
+        <div className={styles['employees-page__content']}>
+          <div className={styles['employees-page__content-header']}>
+            <Link
+              to="/wizard"
+              className={styles['employees-page__content-header-button']}
+            >
+              <PlusIcon />
+              Add Employee
+            </Link>
+          </div>
           <div className={styles['employees-page__table']}>
             <div className={styles['employees-page__table-header']}>
-              <div>Photo</div>
+              <div />
               <div>Name</div>
               <div>Email</div>
               <div>Phone</div>

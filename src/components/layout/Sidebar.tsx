@@ -1,13 +1,15 @@
 import { ArrowLeftIcon, MenuIcon } from 'lucide-react';
 import { cn } from '../../utils/cn';
-import { Link } from 'react-router-dom';
 import { HEADER_MENU_ITEMS, SIDEBAR_ITEMS } from '../../constants';
+import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import Logo from './Logo';
 import styles from './Sidebar.module.css';
 
 const Sidebar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const location = useLocation();
+  const isActive = (path: string) => location.pathname === path;
 
   return (
     <div className={styles['sidebar']} data-testid="sidebar">
@@ -39,7 +41,14 @@ const Sidebar = () => {
             <ul>
               {SIDEBAR_ITEMS.map((item) => (
                 <li key={item.value}>
-                  <Link to={item.path}>
+                  <Link
+                    to={item.path}
+                    className={
+                      isActive(item.path)
+                        ? styles['sidebar__nav-item--active']
+                        : ''
+                    }
+                  >
                     {item.icon}
                     <span>{item.label}</span>
                   </Link>
