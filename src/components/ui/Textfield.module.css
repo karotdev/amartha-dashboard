@@ -1,0 +1,17 @@
+.textfield {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  label {
+    color: var(--color-text-heading);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+  }
+  input {
+    border-radius: 10px;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-body);
+    padding: 12px 16px;
+    font-size: var(--font-size-sm);
+  }
+}

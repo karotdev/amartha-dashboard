@@ -11,8 +11,10 @@
   align-items: center;
   gap: 8px;
   &:hover {
-    .stepper__step-number {
-      background-color: var(--color-accent-primary);
+    &:not([disabled]) {
+      .stepper__step-number {
+        background-color: var(--color-accent-primary);
+      }
     }
   }
 }
@@ -24,7 +26,7 @@
   width: 32px;
   height: 32px;
   border-radius: 10px;
-  background-color: var(--color-accent-secondary);
+  background-color: var(--color-bg-raised);
   font-weight: var(--font-weight-medium);
   transition: background-color 0.2s ease-in-out;
 }

@@ -6,8 +6,12 @@ describe('Stepper', () => {
     const { getByTestId } = render(
       <Stepper
         steps={[
-          { id: 'basic-information', label: 'Basic Information' },
-          { id: 'details', label: 'Details' },
+          {
+            id: 'basic-information',
+            label: 'Basic Information',
+            dataTestId: 'step-basic-information',
+          },
+          { id: 'details', label: 'Details', dataTestId: 'step-details' },
         ]}
         currentStep={0}
         completedSteps={new Set()}

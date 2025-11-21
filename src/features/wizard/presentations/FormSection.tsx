@@ -12,7 +12,7 @@ const FormSection = ({
   return (
     <div className={styles['form-section']}>
       <p className={styles['form-section__title']}>{title}</p>
-      {children}
+      <div>{children}</div>
     </div>
   );
 };

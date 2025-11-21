@@ -1,0 +1,16 @@
+.field-detail {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.field-detail__photo {
+  grid-column: span 2;
+}
+
+.field-detail__notes {
+  grid-column: span 2;
+}

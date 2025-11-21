@@ -4,6 +4,7 @@ import styles from './Stepper.module.css';
 interface Step {
   id: string;
   label: string;
+  dataTestId: string;
 }
 
 interface StepperProps {
@@ -36,7 +37,7 @@ const Stepper = ({
             key={step.id}
             className={styles['stepper__step']}
             disabled={!isAccessible}
-            data-testid={`step-${step.id}`}
+            data-testid={step.dataTestId}
             onClick={() => onStepClick(index)}
           >
             <span
