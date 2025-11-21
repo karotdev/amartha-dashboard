@@ -1,37 +1,27 @@
 .role-option {
   display: flex;
   flex-direction: column;
-  gap: 4px;
   padding: 16px;
   border-radius: 16px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  background: var(--gradient-bg);
-  border: 1px solid var(--color-border);
-  border-top-color: var(--color-highlight);
-  color: var(--color-text-body);
-  box-shadow: var(--shadow-sm);
-
-  &:hover {
-    background: var(--gradient-bg);
-    border-color: var(--color-primary-light);
-    box-shadow: var(--shadow-md);
-    transform: translateY(-1px);
-  }
-
+  transition: background-color 0.2s ease-in-out;
+  background-color: var(--color-bg-raised);
   input {
     display: none;
+  }
+  @media (min-width: 1024px) {
+    &:hover {
+      background-color: var(--color-accent-primary);
+    }
   }
 }
 
 .role-option--checked {
-  background: linear-gradient(
-    to bottom,
-    var(--color-primary-light),
-    var(--color-primary)
-  );
-  border-color: var(--color-primary-dark);
-  border-top-color: var(--color-primary-light);
+  background-color: var(--color-accent-primary);
+}
+
+.role-option__label {
   color: var(--color-text-heading);
-  box-shadow: var(--shadow-md);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
 }

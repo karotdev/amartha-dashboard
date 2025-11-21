@@ -9,6 +9,6 @@ export interface SidebarItem {
 
 export interface RoleOption {
   label: string;
-  value: string;
+  value: 'admin' | 'ops';
   description: string;
 }

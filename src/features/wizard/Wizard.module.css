@@ -1,0 +1,17 @@
+.wizard-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  @media (min-width: 1024px) {
+    gap: 32px;
+  }
+}
+
+.wizard-page__options {
+  display: flex;
+  gap: 16px;
+  & > * {
+    flex: 1;
+    max-width: 240px;
+  }
+}

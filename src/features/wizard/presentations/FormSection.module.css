@@ -1,0 +1,14 @@
+.form-section {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr;
+  @media (min-width: 1024px) {
+    grid-template-columns: 200px 1fr;
+  }
+}
+
+.form-section__title {
+  color: var(--color-text-heading);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+}

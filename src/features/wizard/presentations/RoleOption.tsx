@@ -1,12 +1,12 @@
-import styles from './RoleOption.module.css';
 import { cn } from '../../../utils/cn';
+import styles from './RoleOption.module.css';
 
 interface RoleOptionProps {
   checked: boolean;
+  dataTestId?: string;
+  description: string;
   id: string;
   label: string;
-  description: string;
-  dataTestId?: string;
   onChange: () => void;
 }
 
@@ -28,7 +28,7 @@ const RoleOption = ({
       )}
     >
       <input id={id} type="radio" checked={checked} onChange={onChange} />
-      <span>{label}</span>
+      <span className={styles['role-option__label']}>{label}</span>
       <span>{description}</span>
     </label>
   );
