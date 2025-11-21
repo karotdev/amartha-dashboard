@@ -35,7 +35,7 @@ describe('Sidebar', () => {
   });
 
   it('should have profile and logout button', () => {
-    const { getByText, getByTestId } = render(
+    const { getByText } = render(
       <MemoryRouter>
         <Sidebar />
       </MemoryRouter>,
