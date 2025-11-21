@@ -15,6 +15,7 @@
     align-items: center;
     flex-direction: row;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
 }
 
@@ -32,7 +33,7 @@
   justify-content: flex-end;
   gap: 8px;
   button {
-    background-color: var(--color-bg-raised);
+    background-color: var(--color-accent-primary);
     font-weight: var(--font-weight-medium);
     padding: 12px 16px;
     border-radius: 16px;
@@ -45,7 +46,7 @@
     width: 200px;
     transition: background-color 0.2s ease-in-out;
     &:hover {
-      background-color: var(--color-accent-primary);
+      background-color: var(--color-accent-tertiary);
     }
   }
 }
