@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { getLocations } from '../../../services/locations';
-import type { LocationsResponse } from '../../../schemas/locations.schema';
+import { getLocations } from '../../../../services/locations';
+import type { LocationsResponse } from '../../../../schemas/locations.schema';
 
 export const useGetLocations = (nameLike?: string) => {
   const { data, isLoading, error } = useQuery<LocationsResponse>({

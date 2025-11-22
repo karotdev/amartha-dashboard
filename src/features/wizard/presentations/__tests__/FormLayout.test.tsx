@@ -3,6 +3,8 @@ import {
   FormLayoutActions,
   FormLayoutContent,
   FormLayoutHeader,
+  FormLayoutSection,
+  FormLayoutTitle,
 } from '../FormLayout';
 import { render } from '@testing-library/react';
 
@@ -47,5 +49,25 @@ describe('FormLayout', () => {
       </FormLayout>,
     );
     expect(getByText('Test Actions')).toBeInTheDocument();
+  });
+
+  it('should render with section', () => {
+    const { getByText } = render(
+      <FormLayout>
+        <FormLayoutSection title="Test Section">
+          <div>Test Section Content</div>
+        </FormLayoutSection>
+      </FormLayout>,
+    );
+    expect(getByText('Test Section')).toBeInTheDocument();
+  });
+
+  it('should render with title', () => {
+    const { getByText } = render(
+      <FormLayout>
+        <FormLayoutTitle title="Test Title" description="Test Description" />
+      </FormLayout>,
+    );
+    expect(getByText('Test Title')).toBeInTheDocument();
   });
 });

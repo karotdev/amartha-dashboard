@@ -33,3 +33,23 @@
     width: 200px;
   }
 }
+.form-layout__section {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: minmax(min-content, 1fr);
+  @media (min-width: 1024px) {
+    grid-template-columns: 200px minmax(min-content, 1fr);
+  }
+}
+
+.form-layout__section-title {
+  color: var(--color-text-heading);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+}
+
+.form-layout__title {
+  color: var(--color-text-heading);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+}
