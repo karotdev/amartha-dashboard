@@ -13,9 +13,18 @@ const API_BASE_URL = 'http://localhost:4002';
 export const DETAILS_ENDPOINT = `${API_BASE_URL}/details`;
 
 export const getDetails = async (
-  url: string,
+  page?: number,
+  limit?: number,
 ): Promise<DetailsResponseArray> => {
-  const response = await fetch(url);
+  const url = new URL(DETAILS_ENDPOINT);
+  if (page) {
+    url.searchParams.set('_page', page.toString());
+  }
+  if (limit) {
+    url.searchParams.set('_limit', limit.toString());
+  }
+
+  const response = await fetch(url.toString());
   const data = await response.json();
   return detailsResponseArraySchema.parse(data);
 };

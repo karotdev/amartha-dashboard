@@ -13,9 +13,18 @@ const API_BASE_URL = 'http://localhost:4001';
 export const BASIC_INFO_ENDPOINT = `${API_BASE_URL}/basicInfo`;
 
 export const getBasicInfo = async (
-  url: string,
+  page?: number,
+  limit?: number,
 ): Promise<BasicInfoResponseArray> => {
-  const response = await fetch(url);
+  const url = new URL(BASIC_INFO_ENDPOINT);
+  if (page) {
+    url.searchParams.set('_page', page.toString());
+  }
+  if (limit) {
+    url.searchParams.set('_limit', limit.toString());
+  }
+
+  const response = await fetch(url.toString());
   const data = await response.json();
   return basicInfoResponseArraySchema.parse(data);
 };
