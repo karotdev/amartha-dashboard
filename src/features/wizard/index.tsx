@@ -1,10 +1,9 @@
 import { Activity } from 'react';
+import { FormLayoutSection, FormLayoutTitle } from './presentations/FormLayout';
 import { ROLES_OPTIONS } from '../../constants';
 import { useSearchParams } from 'react-router-dom';
 import FormAdmin from './form-admin';
 import FormOps from './form-ops';
-import FormSection from './presentations/FormSection';
-import FormTitle from './presentations/FormTitle';
 import PageLayout from '../../components/layout/PageLayout';
 import RoleOption from './presentations/RoleOption';
 import Separator from '../../components/ui/Separator';
@@ -21,11 +20,11 @@ const WizardPage = () => {
   return (
     <PageLayout>
       <div className={styles['wizard-page']}>
-        <FormTitle
+        <FormLayoutTitle
           title="Account Wizard"
           description="Choose role to get started"
         />
-        <FormSection title="Role">
+        <FormLayoutSection title="Role">
           <div className={styles['wizard-page__options']}>
             {ROLES_OPTIONS.map((role) => (
               <RoleOption
@@ -39,7 +38,7 @@ const WizardPage = () => {
               />
             ))}
           </div>
-        </FormSection>
+        </FormLayoutSection>
         <Separator />
         <Activity mode={selectedRole === 'admin' ? 'visible' : 'hidden'}>
           <FormAdmin />

@@ -1,27 +1,31 @@
 import { Activity } from 'react';
+import { useGetDepartments } from './repo/use-get-departments';
 import { useStepper } from '../../../hooks/use-stepper';
-import FieldBasicInfo from '../presentations/FieldBasicInfo';
-import FieldDetail from '../presentations/FieldDetail';
-import FormSection from '../presentations/FormSection';
-import FormTitle from '../presentations/FormTitle';
-import Stepper from '../../../components/ui/Stepper';
+import { WIZARD_STEPS_ADMIN } from '../../../constants';
 import {
   FormLayout,
   FormLayoutActions,
   FormLayoutContent,
   FormLayoutHeader,
+  FormLayoutTitle,
+  FormLayoutSection,
 } from '../presentations/FormLayout';
-import { WIZARD_STEPS_ADMIN } from '../../../constants';
 import Button from '../../../components/ui/Button';
+import FieldBasicInfo from '../presentations/FieldBasicInfo';
+import FieldDetail from '../presentations/FieldDetail';
+import Stepper from '../../../components/ui/Stepper';
 
 const FormAdmin = () => {
   const { currentStep, completedSteps, handleStepClick, handleStepComplete } =
     useStepper(WIZARD_STEPS_ADMIN);
 
+  const { data: departments } = useGetDepartments();
+  console.log({ departments });
+
   return (
     <FormLayout>
       <FormLayoutHeader>
-        <FormTitle
+        <FormLayoutTitle
           title="Create Account"
           description="Create your account by completing the necessary steps"
         />
@@ -33,7 +37,7 @@ const FormAdmin = () => {
         />
       </FormLayoutHeader>
       <Activity mode={currentStep === 0 ? 'visible' : 'hidden'}>
-        <FormSection title="Basic Information">
+        <FormLayoutSection title="Basic Information">
           <FormLayoutContent>
             <FieldBasicInfo />
             <FormLayoutActions>
@@ -42,10 +46,10 @@ const FormAdmin = () => {
               </Button>
             </FormLayoutActions>
           </FormLayoutContent>
-        </FormSection>
+        </FormLayoutSection>
       </Activity>
       <Activity mode={currentStep === 1 ? 'visible' : 'hidden'}>
-        <FormSection title="Details">
+        <FormLayoutSection title="Details">
           <FormLayoutContent>
             <FieldDetail />
             <FormLayoutActions>
@@ -54,7 +58,7 @@ const FormAdmin = () => {
               </Button>
             </FormLayoutActions>
           </FormLayoutContent>
-        </FormSection>
+        </FormLayoutSection>
       </Activity>
     </FormLayout>
   );

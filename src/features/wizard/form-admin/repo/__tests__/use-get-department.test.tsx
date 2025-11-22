@@ -1,9 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { renderHook, waitFor } from '@testing-library/react';
+import { mockDepartments } from '../../../../../services/__mocks__/departments.mock';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { renderHook, waitFor } from '@testing-library/react';
 import { useGetDepartments } from '../use-get-departments';
 import * as departmentsService from '../../../../../services/departments';
-import { mockDepartments } from '../../../../../services/__mocks__/departments.mock';
 
 vi.mock('../../../../../services/departments', () => ({
   getDepartments: vi.fn(),
@@ -35,13 +35,18 @@ describe('useGetDepartments', () => {
     const { result } = renderHook(() => useGetDepartments(), { wrapper });
 
     expect(result.current.isLoading).toBe(true);
-    expect(result.current.data).toBeUndefined();
+    expect(result.current.data).toEqual([]);
 
     await waitFor(() => {
       expect(result.current.isLoading).toBe(false);
     });
 
-    expect(result.current.data).toEqual(mockDepartments);
+    expect(result.current.data).toEqual([
+      { label: 'Lending', value: 1 },
+      { label: 'Funding', value: 2 },
+      { label: 'Operations', value: 3 },
+      { label: 'Engineering', value: 4 },
+    ]);
     expect(result.current.error).toBeNull();
     expect(departmentsService.getDepartments).toHaveBeenCalledTimes(1);
   });
@@ -60,7 +65,7 @@ describe('useGetDepartments', () => {
       expect(result.current.isLoading).toBe(false);
     });
 
-    expect(result.current.data).toEqual(filteredDepartments);
+    expect(result.current.data).toEqual([{ label: 'Engineering', value: 4 }]);
     expect(departmentsService.getDepartments).toHaveBeenCalledWith('eng');
   });
 
@@ -74,7 +79,7 @@ describe('useGetDepartments', () => {
       expect(result.current.isLoading).toBe(false);
     });
 
-    expect(result.current.data).toBeUndefined();
+    expect(result.current.data).toEqual([]);
     expect(result.current.error).toBeDefined();
   });
 });

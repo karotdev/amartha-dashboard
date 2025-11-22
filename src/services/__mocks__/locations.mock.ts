@@ -5,4 +5,3 @@ export const mockLocations: LocationsResponse = [
   { id: 2, name: 'Depok' },
   { id: 3, name: 'Surabaya' },
 ];
-

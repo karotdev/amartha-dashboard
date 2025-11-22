@@ -1,9 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { renderHook, waitFor } from '@testing-library/react';
+import { mockLocations } from '../../../../../services/__mocks__/locations.mock';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { renderHook, waitFor } from '@testing-library/react';
 import { useGetLocations } from '../use-get-locations';
 import * as locationsService from '../../../../../services/locations';
-import { mockLocations } from '../../../../../services/__mocks__/locations.mock';
 
 vi.mock('../../../../../services/locations', () => ({
   getLocations: vi.fn(),
@@ -33,13 +33,17 @@ describe('useGetLocations', () => {
     const { result } = renderHook(() => useGetLocations(), { wrapper });
 
     expect(result.current.isLoading).toBe(true);
-    expect(result.current.data).toBeUndefined();
+    expect(result.current.data).toEqual([]);
 
     await waitFor(() => {
       expect(result.current.isLoading).toBe(false);
     });
 
-    expect(result.current.data).toEqual(mockLocations);
+    expect(result.current.data).toEqual([
+      { label: 'Jakarta', value: 1 },
+      { label: 'Depok', value: 2 },
+      { label: 'Surabaya', value: 3 },
+    ]);
     expect(result.current.error).toBeNull();
     expect(locationsService.getLocations).toHaveBeenCalledTimes(1);
   });
@@ -58,7 +62,7 @@ describe('useGetLocations', () => {
       expect(result.current.isLoading).toBe(false);
     });
 
-    expect(result.current.data).toEqual(filteredLocations);
+    expect(result.current.data).toEqual([{ label: 'Jakarta', value: 1 }]);
     expect(locationsService.getLocations).toHaveBeenCalledWith('jak');
   });
 
@@ -72,8 +76,7 @@ describe('useGetLocations', () => {
       expect(result.current.isLoading).toBe(false);
     });
 
-    expect(result.current.data).toBeUndefined();
+    expect(result.current.data).toEqual([]);
     expect(result.current.error).toBeDefined();
   });
 });
-

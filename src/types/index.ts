@@ -24,3 +24,8 @@ export interface Step {
   label: string;
   dataTestId?: string;
 }
+
+export interface Option {
+  label: string;
+  value: number | string;
+}

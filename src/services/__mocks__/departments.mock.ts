@@ -6,4 +6,3 @@ export const mockDepartments: DepartmentsResponse = [
   { id: 3, name: 'Operations' },
   { id: 4, name: 'Engineering' },
 ];
-

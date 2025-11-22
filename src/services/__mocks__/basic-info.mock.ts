@@ -22,4 +22,3 @@ export const mockBasicInfoArray: BasicInfoResponse[] = [
     submissionId: 'sub-1234567891',
   },
 ];
-
