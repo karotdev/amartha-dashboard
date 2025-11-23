@@ -1,5 +1,6 @@
 import { Activity } from 'react';
 import { useGetDepartments } from './repo/use-get-departments';
+import { useGetLocations } from '../form-ops/repo/use-get-locations';
 import { useStepper } from '../../../hooks/use-stepper';
 import { WIZARD_STEPS_ADMIN } from '../../../constants';
 import {
@@ -21,6 +22,8 @@ const FormAdmin = () => {
 
   const { data: departments } = useGetDepartments();
   console.log({ departments });
+  const { data: locations } = useGetLocations();
+  console.log({ locations });
 
   return (
     <FormLayout>

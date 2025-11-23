@@ -1,8 +1,8 @@
 import { expect } from 'vitest';
-import { render } from '@testing-library/react';
-import App from './App';
 import { MemoryRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { render } from '@testing-library/react';
+import App from './App';
 
 describe('App', () => {
   it('should render', () => {
