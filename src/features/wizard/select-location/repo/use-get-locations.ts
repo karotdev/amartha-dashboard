@@ -4,11 +4,11 @@ import { useQuery } from '@tanstack/react-query';
 import type { LocationsResponse } from '../../../../schemas/locations.schema';
 import type { Option } from '../../../../types';
 
-export const useGetLocations = (nameLike?: string) => {
+export const useGetLocations = (nameLike: string) => {
   const { data, isLoading, error } = useQuery<LocationsResponse>({
     queryKey: ['locations', nameLike],
     queryFn: () => getLocations(nameLike),
-    enabled: true,
+    enabled: nameLike.length > 2,
   });
 
   const memoizedData = useMemo<Option[]>(() => {

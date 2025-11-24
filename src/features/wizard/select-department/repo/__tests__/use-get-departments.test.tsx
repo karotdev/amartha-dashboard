@@ -32,7 +32,7 @@ describe('useGetDepartments', () => {
       mockDepartments,
     );
 
-    const { result } = renderHook(() => useGetDepartments(), { wrapper });
+    const { result } = renderHook(() => useGetDepartments('test'), { wrapper });
 
     expect(result.current.isLoading).toBe(true);
     expect(result.current.data).toEqual([]);
@@ -48,6 +48,7 @@ describe('useGetDepartments', () => {
       { label: 'Engineering', value: 4 },
     ]);
     expect(result.current.error).toBeNull();
+    expect(departmentsService.getDepartments).toHaveBeenCalledWith('test');
     expect(departmentsService.getDepartments).toHaveBeenCalledTimes(1);
   });
 
@@ -73,7 +74,7 @@ describe('useGetDepartments', () => {
     const error = new Error('Failed to fetch departments');
     vi.mocked(departmentsService.getDepartments).mockRejectedValue(error);
 
-    const { result } = renderHook(() => useGetDepartments(), { wrapper });
+    const { result } = renderHook(() => useGetDepartments('test'), { wrapper });
 
     await waitFor(() => {
       expect(result.current.isLoading).toBe(false);
@@ -81,5 +82,21 @@ describe('useGetDepartments', () => {
 
     expect(result.current.data).toEqual([]);
     expect(result.current.error).toBeDefined();
+  });
+
+  it('should not fetch when nameLike length <= 2', () => {
+    const { result } = renderHook(() => useGetDepartments('ab'), { wrapper });
+
+    expect(result.current.isLoading).toBe(false);
+    expect(result.current.data).toEqual([]);
+    expect(departmentsService.getDepartments).not.toHaveBeenCalled();
+  });
+
+  it('should not fetch when nameLike is empty string', () => {
+    const { result } = renderHook(() => useGetDepartments(''), { wrapper });
+
+    expect(result.current.isLoading).toBe(false);
+    expect(result.current.data).toEqual([]);
+    expect(departmentsService.getDepartments).not.toHaveBeenCalled();
   });
 });

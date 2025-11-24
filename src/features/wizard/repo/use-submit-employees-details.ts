@@ -1,5 +1,5 @@
-import { useMutation } from '@tanstack/react-query';
 import { createDetails } from '../../../services/details';
+import { useMutation } from '@tanstack/react-query';
 import type {
   DetailsInput,
   DetailsResponse,

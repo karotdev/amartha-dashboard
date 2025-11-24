@@ -24,7 +24,7 @@ vi.mock('../../../../hooks/use-local-storage', () => ({
   loadDraft: mockLoadDraft,
   clearDraft: mockClearDraft,
 }));
-vi.mock('./repo/use-get-departments', () => ({
+vi.mock('../select-department/repo/use-get-departments', () => ({
   useGetDepartments: () => ({
     data: [
       { label: 'Engineering', value: 1 },
@@ -34,7 +34,7 @@ vi.mock('./repo/use-get-departments', () => ({
     error: null,
   }),
 }));
-vi.mock('../form-ops/repo/use-get-locations', () => ({
+vi.mock('../select-location/repo/use-get-locations', () => ({
   useGetLocations: () => ({
     data: [
       { label: 'Jakarta', value: 1 },

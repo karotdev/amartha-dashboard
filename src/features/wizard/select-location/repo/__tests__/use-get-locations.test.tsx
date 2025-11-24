@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { mockLocations } from '../../../../../services/__mocks__/locations.mock';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook, waitFor } from '@testing-library/react';
-import { useGetLocations } from '../use-get-locations';
+import { useGetLocations } from '../../../select-location/repo/use-get-locations';
 import * as locationsService from '../../../../../services/locations';
 
 vi.mock('../../../../../services/locations', () => ({
@@ -30,7 +30,7 @@ describe('useGetLocations', () => {
   it('should return locations successfully', async () => {
     vi.mocked(locationsService.getLocations).mockResolvedValue(mockLocations);
 
-    const { result } = renderHook(() => useGetLocations(), { wrapper });
+    const { result } = renderHook(() => useGetLocations('test'), { wrapper });
 
     expect(result.current.isLoading).toBe(true);
     expect(result.current.data).toEqual([]);
@@ -45,6 +45,7 @@ describe('useGetLocations', () => {
       { label: 'Surabaya', value: 3 },
     ]);
     expect(result.current.error).toBeNull();
+    expect(locationsService.getLocations).toHaveBeenCalledWith('test');
     expect(locationsService.getLocations).toHaveBeenCalledTimes(1);
   });
 
@@ -70,7 +71,7 @@ describe('useGetLocations', () => {
     const error = new Error('Failed to fetch locations');
     vi.mocked(locationsService.getLocations).mockRejectedValue(error);
 
-    const { result } = renderHook(() => useGetLocations(), { wrapper });
+    const { result } = renderHook(() => useGetLocations('test'), { wrapper });
 
     await waitFor(() => {
       expect(result.current.isLoading).toBe(false);
@@ -78,5 +79,21 @@ describe('useGetLocations', () => {
 
     expect(result.current.data).toEqual([]);
     expect(result.current.error).toBeDefined();
+  });
+
+  it('should not fetch when nameLike length <= 2', () => {
+    const { result } = renderHook(() => useGetLocations('ab'), { wrapper });
+
+    expect(result.current.isLoading).toBe(false);
+    expect(result.current.data).toEqual([]);
+    expect(locationsService.getLocations).not.toHaveBeenCalled();
+  });
+
+  it('should not fetch when nameLike is empty string', () => {
+    const { result } = renderHook(() => useGetLocations(''), { wrapper });
+
+    expect(result.current.isLoading).toBe(false);
+    expect(result.current.data).toEqual([]);
+    expect(locationsService.getLocations).not.toHaveBeenCalled();
   });
 });

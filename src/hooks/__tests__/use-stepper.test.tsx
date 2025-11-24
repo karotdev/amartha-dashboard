@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach } from 'vitest';
-import { MemoryRouter, useSearchParams } from 'react-router-dom';
+import { describe, it, expect } from 'vitest';
+import { MemoryRouter } from 'react-router-dom';
 import { renderHook, act } from '@testing-library/react';
 import { useStepper } from '../use-stepper';
 

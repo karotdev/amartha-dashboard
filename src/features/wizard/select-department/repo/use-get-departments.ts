@@ -4,11 +4,11 @@ import { useQuery } from '@tanstack/react-query';
 import type { DepartmentsResponse } from '../../../../schemas/departments.schema';
 import type { Option } from '../../../../types';
 
-export const useGetDepartments = (nameLike?: string) => {
+export const useGetDepartments = (nameLike: string) => {
   const { data, isLoading, error } = useQuery<DepartmentsResponse>({
     queryKey: ['departments', nameLike],
     queryFn: () => getDepartments(nameLike),
-    enabled: true,
+    enabled: nameLike.length > 2,
   });
 
   const memoizedData = useMemo<Option[]>(() => {

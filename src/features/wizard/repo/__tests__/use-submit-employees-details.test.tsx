@@ -1,9 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { renderHook, waitFor } from '@testing-library/react';
+import { mockDetails } from '../../../../services/__mocks__/details.mock';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { renderHook, waitFor } from '@testing-library/react';
 import { useSubmitEmployeesDetails } from '../use-submit-employees-details';
 import * as detailsService from '../../../../services/details';
-import { mockDetails } from '../../../../services/__mocks__/details.mock';
 import type { DetailsInput } from '../../../../schemas/details.schema';
 
 vi.mock('../../../../services/details', () => ({

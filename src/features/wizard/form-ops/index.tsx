@@ -1,4 +1,3 @@
-import { useGetLocations } from './repo/use-get-locations';
 import { useStepper } from '../../../hooks/use-stepper';
 import { WIZARD_STEPS_OPS } from '../../../constants';
 import {
@@ -16,9 +15,6 @@ import Stepper from '../../../components/ui/Stepper';
 const FormOps = () => {
   const { currentStep, completedSteps, handleStepClick, handleStepComplete } =
     useStepper(WIZARD_STEPS_OPS);
-
-  const { data: locations } = useGetLocations();
-  console.log({ locations });
 
   return (
     <FormLayout>

@@ -1,5 +1,5 @@
-import { useMutation } from '@tanstack/react-query';
 import { createBasicInfo } from '../../../services/basic-info';
+import { useMutation } from '@tanstack/react-query';
 import type {
   BasicInfoInput,
   BasicInfoResponse,

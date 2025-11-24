@@ -1,5 +1,6 @@
 import styles from './FieldDetail.module.css';
 import Textfield from '../../../components/ui/Textfield';
+import SelectLocation from '../select-location';
 
 const FieldDetail = () => {
   return (
@@ -15,11 +16,7 @@ const FieldDetail = () => {
         id="employment-type"
         placeholder="Enter employment type"
       />
-      <Textfield
-        label="Office Location"
-        id="office-location"
-        placeholder="Enter office location"
-      />
+      <SelectLocation />
       <Textfield
         className={styles['field-detail__notes']}
         label="Notes"

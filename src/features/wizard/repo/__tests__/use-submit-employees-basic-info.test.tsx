@@ -1,9 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { renderHook, waitFor } from '@testing-library/react';
+import { mockBasicInfo } from '../../../../services/__mocks__/basic-info.mock';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { renderHook, waitFor } from '@testing-library/react';
 import { useSubmitEmployeesBasicInfo } from '../use-submit-employees-basic-info';
 import * as basicInfoService from '../../../../services/basic-info';
-import { mockBasicInfo } from '../../../../services/__mocks__/basic-info.mock';
 import type { BasicInfoInput } from '../../../../schemas/basic-info.schema';
 
 vi.mock('../../../../services/basic-info', () => ({
