@@ -24,7 +24,7 @@ export const basicInfoInputSchema = z.object({
   role: z.enum([...ROLE_FORM_OPTIONS] as [string, ...string[]], {
     message: 'Role is required',
   }),
-  submissionId: z.string().optional(),
+  submissionId: z.string(),
 });
 
 export const basicInfoResponseSchema = z.object({
@@ -34,7 +34,7 @@ export const basicInfoResponseSchema = z.object({
   email: z.string(),
   departmentId: z.number().int().positive(),
   role: z.enum([...ROLE_FORM_OPTIONS] as [string, ...string[]]),
-  submissionId: z.string().optional(),
+  submissionId: z.string(),
 });
 
 export const basicInfoResponseArraySchema = z.array(basicInfoResponseSchema);

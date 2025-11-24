@@ -18,8 +18,8 @@ export const detailsInputSchema = z.object({
     })
     .int('Please select from available options')
     .positive('Please select from available options'),
-  notes: z.string().optional().default(''),
-  submissionId: z.string().optional(),
+  notes: z.string().optional(),
+  submissionId: z.string(),
 });
 
 export const detailsResponseSchema = z.object({
@@ -28,7 +28,7 @@ export const detailsResponseSchema = z.object({
   employmentType: z.enum([...EMPLOYMENT_TYPE_OPTIONS] as [string, ...string[]]),
   locationId: z.number().int().positive(),
   notes: z.string().optional(),
-  submissionId: z.string().optional(),
+  submissionId: z.string(),
 });
 
 export const detailsResponseArraySchema = z.array(detailsResponseSchema);

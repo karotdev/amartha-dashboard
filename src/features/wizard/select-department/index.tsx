@@ -3,30 +3,49 @@ import { useGetDepartments } from './repo/use-get-departments';
 import styles from './SelectDepartment.module.css';
 import Textfield from '../../../components/ui/Textfield';
 
-const SelectDepartment = () => {
+interface SelectDepartmentProps {
+  value?: string;
+  onChange?: (value: string, id: number) => void;
+  onBlur?: () => void;
+  error?: string;
+}
+
+const SelectDepartment = ({
+  value: controlledValue,
+  onChange,
+  onBlur,
+  error,
+}: SelectDepartmentProps) => {
   const [nameLike, setNameLike] = useState('');
   const [selectedValue, setSelectedValue] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const { data, isLoading } = useGetDepartments(nameLike);
   const selectRef = useRef<HTMLDivElement>(null);
 
+  const displayValue = controlledValue || selectedValue || nameLike;
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setNameLike(value);
+    const inputValue = e.target.value;
+    setNameLike(inputValue);
     setSelectedValue('');
     setIsSearching(true);
+    if (onChange) {
+      onChange('', 0);
+    }
   };
 
   const handleSelect = (department: {
     label: string;
     value: number | string;
   }) => {
+    const departmentId = Number(department.value);
     setSelectedValue(department.label);
     setNameLike(department.label);
     setIsSearching(false);
+    if (onChange) {
+      onChange(department.label, departmentId);
+    }
   };
-
-  const displayValue = selectedValue || nameLike;
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -38,6 +57,9 @@ const SelectDepartment = () => {
         if (selectedValue) {
           setNameLike(selectedValue);
         }
+        if (onBlur) {
+          onBlur();
+        }
       }
     };
 
@@ -48,7 +70,7 @@ const SelectDepartment = () => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isSearching, selectedValue]);
+  }, [isSearching, selectedValue, onBlur]);
 
   return (
     <div ref={selectRef} className={styles['select-department']}>
@@ -59,7 +81,11 @@ const SelectDepartment = () => {
         value={displayValue}
         onChange={handleInputChange}
         onFocus={() => setIsSearching(true)}
+        onBlur={onBlur}
       />
+      {error && (
+        <span style={{ color: 'red', fontSize: '0.875rem' }}>{error}</span>
+      )}
       <Activity
         mode={isSearching && nameLike.length > 0 ? 'visible' : 'hidden'}
       >

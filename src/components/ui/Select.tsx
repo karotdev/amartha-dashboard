@@ -4,20 +4,24 @@ import Textfield from './Textfield';
 import type { Option } from '../../types';
 
 interface SelectProps {
+  error?: string;
   id?: string;
-  label: string;
-  options: Option[] | string[];
-  placeholder: string;
+  label?: string;
+  options?: Option[] | string[];
+  placeholder?: string;
   value?: string;
+  onBlur?: () => void;
   onChange?: (value: string) => void;
 }
 
 const Select = ({
+  error,
   id,
-  label,
-  options,
-  placeholder,
+  label = '',
+  options = [],
+  placeholder = '',
   value: controlledValue,
+  onBlur,
   onChange,
 }: SelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -68,8 +72,12 @@ const Select = ({
           id={id}
           placeholder={placeholder}
           value={value}
+          onBlur={onBlur}
         />
       </div>
+      {error && (
+        <span style={{ color: 'red', fontSize: '0.875rem' }}>{error}</span>
+      )}
       <Activity mode={isOpen ? 'visible' : 'hidden'}>
         <div className={styles['select__options']}>
           {options.map((option: Option | string) => {

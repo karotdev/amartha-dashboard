@@ -6,68 +6,70 @@ import {
   FormLayoutSection,
   FormLayoutTitle,
 } from '../FormLayout';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 describe('FormLayout', () => {
-  it('should render with children', () => {
-    const { getByText } = render(
+  it('should display children content that users can see', () => {
+    render(
       <FormLayout>
         <div>Test Children</div>
       </FormLayout>,
     );
-    expect(getByText('Test Children')).toBeInTheDocument();
+    expect(screen.getByText('Test Children')).toBeInTheDocument();
   });
 
-  it('should render with header', () => {
-    const { getByText } = render(
+  it('should display header content that users can see', () => {
+    render(
       <FormLayout>
         <FormLayoutHeader>
           <div>Test Header</div>
         </FormLayoutHeader>
       </FormLayout>,
     );
-    expect(getByText('Test Header')).toBeInTheDocument();
+    expect(screen.getByText('Test Header')).toBeInTheDocument();
   });
 
-  it('should render with content', () => {
-    const { getByText } = render(
+  it('should display content that users can see', () => {
+    render(
       <FormLayout>
         <FormLayoutContent>
           <div>Test Content</div>
         </FormLayoutContent>
       </FormLayout>,
     );
-    expect(getByText('Test Content')).toBeInTheDocument();
+    expect(screen.getByText('Test Content')).toBeInTheDocument();
   });
 
-  it('should render with actions', () => {
-    const { getByText } = render(
+  it('should display action buttons that users can interact with', () => {
+    render(
       <FormLayout>
         <FormLayoutActions>
-          <div>Test Actions</div>
+          <button>Submit</button>
         </FormLayoutActions>
       </FormLayout>,
     );
-    expect(getByText('Test Actions')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /submit/i })).toBeInTheDocument();
   });
 
-  it('should render with section', () => {
-    const { getByText } = render(
+  it('should display section title that users can see', () => {
+    render(
       <FormLayout>
-        <FormLayoutSection title="Test Section">
-          <div>Test Section Content</div>
+        <FormLayoutSection title="Basic Information">
+          <div>Section Content</div>
         </FormLayoutSection>
       </FormLayout>,
     );
-    expect(getByText('Test Section')).toBeInTheDocument();
+    expect(screen.getByText('Basic Information')).toBeInTheDocument();
+    expect(screen.getByText('Section Content')).toBeInTheDocument();
   });
 
-  it('should render with title', () => {
-    const { getByText } = render(
+  it('should display title and description that users can see', () => {
+    render(
       <FormLayout>
-        <FormLayoutTitle title="Test Title" description="Test Description" />
+        <FormLayoutTitle title="Create Account" description="Fill in the form" />
       </FormLayout>,
     );
-    expect(getByText('Test Title')).toBeInTheDocument();
+    expect(screen.getByText('Create Account')).toBeInTheDocument();
+    expect(screen.getByText('Fill in the form')).toBeInTheDocument();
   });
 });

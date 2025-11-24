@@ -1,4 +1,5 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 import Select from '../Select';
 import type { Option } from '../../../types';
@@ -17,19 +18,21 @@ describe('Select', () => {
     expect(screen.getByPlaceholderText('Enter role')).toBeInTheDocument();
   });
 
-  it('should render options from string array', () => {
+  it('should show options that users can see when clicking on the select field', async () => {
+    const user = userEvent.setup();
     const options = ['Admin', 'Engineer', 'Finance'];
     render(<Select label="Role" options={options} placeholder="Enter role" />);
 
     const textfield = screen.getByPlaceholderText('Enter role');
-    fireEvent.click(textfield);
+    await user.click(textfield);
 
     options.forEach((option) => {
-      expect(screen.getByText(option)).toBeInTheDocument();
+      expect(screen.getByText(option)).toBeVisible();
     });
   });
 
-  it('should render options from Option array', () => {
+  it('should show option labels that users can see', async () => {
+    const user = userEvent.setup();
     const options: Option[] = [
       { label: 'Engineering', value: 1 },
       { label: 'Operations', value: 2 },
@@ -45,10 +48,10 @@ describe('Select', () => {
     );
 
     const textfield = screen.getByPlaceholderText('Select department');
-    fireEvent.click(textfield);
+    await user.click(textfield);
 
     options.forEach((option) => {
-      expect(screen.getByText(option.label)).toBeInTheDocument();
+      expect(screen.getByText(option.label)).toBeVisible();
     });
   });
 
@@ -59,77 +62,71 @@ describe('Select', () => {
     expect(screen.getByPlaceholderText('Enter role')).toBeInTheDocument();
   });
 
-  it('should open options when textfield is clicked', () => {
+  it('should show options that users can see when clicking the select field', async () => {
+    const user = userEvent.setup();
     const options = ['Admin', 'Engineer'];
     render(<Select label="Role" options={options} placeholder="Enter role" />);
 
     const textfield = screen.getByPlaceholderText('Enter role');
-    fireEvent.click(textfield);
+    await user.click(textfield);
 
-    expect(screen.getByText('Admin')).toBeInTheDocument();
-    expect(screen.getByText('Engineer')).toBeInTheDocument();
+    expect(screen.getByText('Admin')).toBeVisible();
+    expect(screen.getByText('Engineer')).toBeVisible();
   });
 
-  it('should select option and update value', () => {
+  it('should display selected option value that user can see', async () => {
+    const user = userEvent.setup();
     const options = ['Admin', 'Engineer'];
     render(<Select label="Role" options={options} placeholder="Enter role" />);
 
     const textfield = screen.getByPlaceholderText(
       'Enter role',
     ) as HTMLInputElement;
-    fireEvent.click(textfield);
-    fireEvent.click(screen.getByText('Admin'));
+    await user.click(textfield);
+    await user.click(screen.getByText('Admin'));
 
     expect(textfield.value).toBe('Admin');
   });
 
-  it('should close options when option is selected', () => {
+  it('should hide options from view when user selects an option', async () => {
+    const user = userEvent.setup();
     const options = ['Admin', 'Engineer'];
-    const { container } = render(
+    render(
       <Select label="Role" options={options} placeholder="Enter role" />,
     );
 
     const textfield = screen.getByPlaceholderText('Enter role');
-    fireEvent.click(textfield);
+    await user.click(textfield);
 
-    const adminOption = screen.getByText('Admin');
-    expect(adminOption).toBeInTheDocument();
+    expect(screen.getByText('Admin')).toBeVisible();
+    expect(screen.getByText('Engineer')).toBeVisible();
 
-    fireEvent.click(adminOption);
+    await user.click(screen.getByText('Admin'));
 
-    const optionsContainer = container.querySelector(
-      '[class*="select__options"]',
-    );
-    if (optionsContainer) {
-      const style = window.getComputedStyle(optionsContainer);
-      expect(style.display).toBe('none');
-    }
+    expect(screen.getByText('Engineer')).not.toBeVisible();
   });
 
-  it('should close options when clicking outside', () => {
+  it('should hide options from view when user clicks outside', async () => {
+    const user = userEvent.setup();
     const options = ['Admin', 'Engineer'];
-    const { container } = render(
+    render(
       <Select label="Role" options={options} placeholder="Enter role" />,
     );
 
     const textfield = screen.getByPlaceholderText('Enter role');
-    fireEvent.click(textfield);
+    await user.click(textfield);
 
-    const adminOption = screen.getByText('Admin');
-    expect(adminOption).toBeInTheDocument();
+    expect(screen.getByText('Admin')).toBeVisible();
+    expect(screen.getByText('Engineer')).toBeVisible();
 
-    fireEvent.mouseDown(document.body);
+    await user.click(document.body);
 
-    const optionsContainer = container.querySelector(
-      '[class*="select__options"]',
-    );
-    if (optionsContainer) {
-      const style = window.getComputedStyle(optionsContainer);
-      expect(style.display).toBe('none');
-    }
+    expect(screen.getByText('Admin')).not.toBeVisible();
+    expect(screen.getByText('Engineer')).not.toBeVisible();
   });
 
-  it('should call onChange when option is selected', () => {
+  it('should call onChange when user selects an option', async () => {
+    const user = userEvent.setup();
     const options = ['Admin', 'Engineer'];
     const handleChange = vi.fn();
     render(
@@ -142,13 +139,13 @@ describe('Select', () => {
     );
 
     const textfield = screen.getByPlaceholderText('Enter role');
-    fireEvent.click(textfield);
-    fireEvent.click(screen.getByText('Admin'));
+    await user.click(textfield);
+    await user.click(screen.getByText('Admin'));
 
     expect(handleChange).toHaveBeenCalledWith('Admin');
   });
 
-  it('should work with controlled value', () => {
+  it('should display controlled value that user can see', () => {
     const options = ['Admin', 'Engineer'];
     const { rerender } = render(
       <Select
@@ -176,7 +173,8 @@ describe('Select', () => {
     expect(textfield.value).toBe('Engineer');
   });
 
-  it('should handle Option objects with correct values', () => {
+  it('should display option label when user selects Option object', async () => {
+    const user = userEvent.setup();
     const options: Option[] = [
       { label: 'Engineering', value: 1 },
       { label: 'Operations', value: 2 },
@@ -193,13 +191,82 @@ describe('Select', () => {
     );
 
     const textfield = screen.getByPlaceholderText('Select department');
-    fireEvent.click(textfield);
-    fireEvent.click(screen.getByText('Engineering'));
+    await user.click(textfield);
+    await user.click(screen.getByText('Engineering'));
 
     expect(handleChange).toHaveBeenCalledWith('1');
     const input = screen.getByPlaceholderText(
       'Select department',
     ) as HTMLInputElement;
     expect(input.value).toBe('Engineering');
+  });
+
+  it('should render without label', () => {
+    render(<Select options={['Admin']} placeholder="Enter role" />);
+
+    expect(screen.getByPlaceholderText('Enter role')).toBeInTheDocument();
+    expect(screen.queryByText('Role')).not.toBeInTheDocument();
+  });
+
+  it('should not show any options when no options provided', async () => {
+    const user = userEvent.setup();
+    render(<Select label="Role" placeholder="Enter role" />);
+
+    expect(screen.getByText('Role')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Enter role')).toBeInTheDocument();
+
+    const textfield = screen.getByPlaceholderText('Enter role');
+    await user.click(textfield);
+
+    expect(screen.queryByText('Admin')).not.toBeInTheDocument();
+    expect(screen.queryByText('Engineer')).not.toBeInTheDocument();
+  });
+
+  it('should render without placeholder', () => {
+    render(<Select id="role" label="Role" options={['Admin']} />);
+
+    expect(screen.getByText('Role')).toBeInTheDocument();
+    const input = screen.getByLabelText('Role') as HTMLInputElement;
+    expect(input.placeholder).toBe('');
+  });
+
+  it('should render with all optional props omitted', () => {
+    render(<Select />);
+
+    const input = document.querySelector('input');
+    expect(input).toBeInTheDocument();
+    expect(input?.placeholder).toBe('');
+  });
+
+  it('should display error message when error prop is provided', () => {
+    render(
+      <Select
+        label="Role"
+        options={['Admin']}
+        placeholder="Enter role"
+        error="This field is required"
+      />,
+    );
+
+    expect(screen.getByText('This field is required')).toBeInTheDocument();
+  });
+
+  it('should call onBlur when user leaves the select field', async () => {
+    const user = userEvent.setup();
+    const handleBlur = vi.fn();
+    render(
+      <Select
+        label="Role"
+        options={['Admin']}
+        placeholder="Enter role"
+        onBlur={handleBlur}
+      />,
+    );
+
+    const textfield = screen.getByPlaceholderText('Enter role');
+    await user.click(textfield);
+    await user.tab();
+
+    expect(handleBlur).toHaveBeenCalled();
   });
 });

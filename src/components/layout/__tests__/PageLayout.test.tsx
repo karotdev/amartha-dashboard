@@ -1,16 +1,17 @@
 import { MemoryRouter } from 'react-router-dom';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import PageLayout from '../PageLayout';
 
 describe('PageLayout', () => {
-  it('should render sidebar and content', () => {
-    const { getByTestId } = render(
+  it('should render header, sidebar, and page content that users can see', () => {
+    render(
       <MemoryRouter>
-        <PageLayout />
+        <PageLayout>
+          <div>Page Content</div>
+        </PageLayout>
       </MemoryRouter>,
     );
-    expect(getByTestId('header')).toBeInTheDocument();
-    expect(getByTestId('sidebar')).toBeInTheDocument();
-    expect(getByTestId('content')).toBeInTheDocument();
+    expect(screen.getAllByText('Amartha').length).toBeGreaterThan(0);
+    expect(screen.getByText('Page Content')).toBeInTheDocument();
   });
 });

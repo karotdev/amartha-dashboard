@@ -13,7 +13,7 @@ describe('SelectDepartment', () => {
     vi.clearAllMocks();
   });
 
-  it('should render Textfield with correct label and placeholder', () => {
+  it('should display label and placeholder that users can see', () => {
     vi.mocked(useGetDepartmentsHook.useGetDepartments).mockReturnValue({
       data: [],
       isLoading: false,
@@ -26,7 +26,7 @@ describe('SelectDepartment', () => {
     expect(screen.getByPlaceholderText('Enter department')).toBeInTheDocument();
   });
 
-  it('should show options when nameLike has length > 0 and data exists', async () => {
+  it('should show department options that users can see when typing in the field', async () => {
     const user = userEvent.setup();
     vi.mocked(useGetDepartmentsHook.useGetDepartments).mockReturnValue({
       data: [
@@ -42,29 +42,28 @@ describe('SelectDepartment', () => {
     const input = screen.getByPlaceholderText('Enter department');
     await user.type(input, 'eng');
 
-    expect(screen.getByText('Engineering')).toBeInTheDocument();
-    expect(screen.getByText('Operations')).toBeInTheDocument();
+    expect(screen.getByText('Engineering')).toBeVisible();
+    expect(screen.getByText('Operations')).toBeVisible();
   });
 
-  it('should hide options when nameLike is empty', () => {
+  it('should not show options when user has not typed anything', () => {
     vi.mocked(useGetDepartmentsHook.useGetDepartments).mockReturnValue({
       data: [{ label: 'Engineering', value: 1 }],
       isLoading: false,
       error: null,
     });
 
-    const { container } = render(<SelectDepartment />);
+    render(<SelectDepartment />);
 
-    const optionsContainer = container.querySelector(
-      '.select-department__options',
-    );
-    if (optionsContainer) {
-      const style = window.getComputedStyle(optionsContainer);
-      expect(style.display).toBe('none');
+    const engineeringOption = screen.queryByText('Engineering');
+    if (engineeringOption) {
+      expect(engineeringOption).not.toBeVisible();
+    } else {
+      expect(engineeringOption).not.toBeInTheDocument();
     }
   });
 
-  it('should show loading state when isLoading is true', () => {
+  it('should show loading message when searching', () => {
     vi.mocked(useGetDepartmentsHook.useGetDepartments).mockReturnValue({
       data: [],
       isLoading: true,
@@ -76,26 +75,7 @@ describe('SelectDepartment', () => {
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
-  it('should hide loading state when isLoading is false', () => {
-    vi.mocked(useGetDepartmentsHook.useGetDepartments).mockReturnValue({
-      data: [],
-      isLoading: false,
-      error: null,
-    });
-
-    const { container } = render(<SelectDepartment />);
-
-    const loadingElement = container.querySelector(
-      '.select-department__loading',
-    );
-    if (loadingElement) {
-      expect(loadingElement).toHaveStyle({ display: 'none' });
-    } else {
-      expect(loadingElement).toBeNull();
-    }
-  });
-
-  it('should update nameLike when user types in Textfield', async () => {
+  it('should allow users to type and see their input', async () => {
     const user = userEvent.setup();
     vi.mocked(useGetDepartmentsHook.useGetDepartments).mockReturnValue({
       data: [],
@@ -113,14 +93,36 @@ describe('SelectDepartment', () => {
     expect(input.value).toBe('eng');
   });
 
-  it('should call useGetDepartments with updated nameLike', async () => {
+  it('should allow users to select a department option', async () => {
     const user = userEvent.setup();
-    const mockUseGetDepartments = vi.mocked(
-      useGetDepartmentsHook.useGetDepartments,
-    );
+    const handleChange = vi.fn();
+    vi.mocked(useGetDepartmentsHook.useGetDepartments).mockReturnValue({
+      data: [
+        { label: 'Engineering', value: 1 },
+        { label: 'Operations', value: 2 },
+      ],
+      isLoading: false,
+      error: null,
+    });
 
-    mockUseGetDepartments.mockReturnValue({
-      data: [],
+    render(<SelectDepartment onChange={handleChange} />);
+
+    const input = screen.getByPlaceholderText('Enter department');
+    await user.type(input, 'eng');
+
+    expect(screen.getByText('Engineering')).toBeVisible();
+    expect(screen.getByText('Operations')).toBeVisible();
+
+    await user.click(screen.getByText('Engineering'));
+
+    expect(handleChange).toHaveBeenCalledWith('Engineering', 1);
+    expect((input as HTMLInputElement).value).toBe('Engineering');
+  });
+
+  it('should hide options from view when user clicks outside', async () => {
+    const user = userEvent.setup();
+    vi.mocked(useGetDepartmentsHook.useGetDepartments).mockReturnValue({
+      data: [{ label: 'Engineering', value: 1 }],
       isLoading: false,
       error: null,
     });
@@ -130,6 +132,10 @@ describe('SelectDepartment', () => {
     const input = screen.getByPlaceholderText('Enter department');
     await user.type(input, 'eng');
 
-    expect(mockUseGetDepartments).toHaveBeenCalled();
+    expect(screen.getByText('Engineering')).toBeVisible();
+
+    await user.click(document.body);
+
+    expect(screen.getByText('Engineering')).not.toBeVisible();
   });
 });

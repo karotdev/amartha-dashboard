@@ -3,27 +3,46 @@ import { useGetLocations } from './repo/use-get-locations';
 import styles from './SelectLocation.module.css';
 import Textfield from '../../../components/ui/Textfield';
 
-const SelectLocation = () => {
+interface SelectLocationProps {
+  value?: string;
+  onChange?: (value: string, id: number) => void;
+  onBlur?: () => void;
+  error?: string;
+}
+
+const SelectLocation = ({
+  value: controlledValue,
+  onChange,
+  onBlur,
+  error,
+}: SelectLocationProps) => {
   const [nameLike, setNameLike] = useState('');
   const [selectedValue, setSelectedValue] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const { data, isLoading } = useGetLocations(nameLike);
   const selectRef = useRef<HTMLDivElement>(null);
 
+  const displayValue = controlledValue || selectedValue || nameLike;
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setNameLike(value);
+    const inputValue = e.target.value;
+    setNameLike(inputValue);
     setSelectedValue('');
     setIsSearching(true);
+    if (onChange) {
+      onChange('', 0);
+    }
   };
 
   const handleSelect = (location: { label: string; value: number | string }) => {
+    const locationId = Number(location.value);
     setSelectedValue(location.label);
     setNameLike(location.label);
     setIsSearching(false);
+    if (onChange) {
+      onChange(location.label, locationId);
+    }
   };
-
-  const displayValue = selectedValue || nameLike;
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -35,6 +54,9 @@ const SelectLocation = () => {
         if (selectedValue) {
           setNameLike(selectedValue);
         }
+        if (onBlur) {
+          onBlur();
+        }
       }
     };
 
@@ -45,7 +67,7 @@ const SelectLocation = () => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isSearching, selectedValue]);
+  }, [isSearching, selectedValue, onBlur]);
 
   return (
     <div ref={selectRef} className={styles['select-location']}>
@@ -56,7 +78,9 @@ const SelectLocation = () => {
         value={displayValue}
         onChange={handleInputChange}
         onFocus={() => setIsSearching(true)}
+        onBlur={onBlur}
       />
+      {error && <span style={{ color: 'red', fontSize: '0.875rem' }}>{error}</span>}
       <Activity mode={isSearching && nameLike.length > 0 ? 'visible' : 'hidden'}>
         <div className={styles['select-location__options']}>
           {data.map((location) => (

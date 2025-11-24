@@ -13,7 +13,7 @@ describe('SelectLocation', () => {
     vi.clearAllMocks();
   });
 
-  it('should render Textfield with correct label and placeholder', () => {
+  it('should display label and placeholder that users can see', () => {
     vi.mocked(useGetLocationsHook.useGetLocations).mockReturnValue({
       data: [],
       isLoading: false,
@@ -26,7 +26,7 @@ describe('SelectLocation', () => {
     expect(screen.getByPlaceholderText('Enter location')).toBeInTheDocument();
   });
 
-  it('should show options when nameLike has length > 0 and data exists', async () => {
+  it('should show location options that users can see when typing in the field', async () => {
     const user = userEvent.setup();
     vi.mocked(useGetLocationsHook.useGetLocations).mockReturnValue({
       data: [
@@ -42,29 +42,28 @@ describe('SelectLocation', () => {
     const input = screen.getByPlaceholderText('Enter location');
     await user.type(input, 'jak');
 
-    expect(screen.getByText('Jakarta')).toBeInTheDocument();
-    expect(screen.getByText('Bandung')).toBeInTheDocument();
+    expect(screen.getByText('Jakarta')).toBeVisible();
+    expect(screen.getByText('Bandung')).toBeVisible();
   });
 
-  it('should hide options when nameLike is empty', () => {
+  it('should not show options when user has not typed anything', () => {
     vi.mocked(useGetLocationsHook.useGetLocations).mockReturnValue({
       data: [{ label: 'Jakarta', value: 1 }],
       isLoading: false,
       error: null,
     });
 
-    const { container } = render(<SelectLocation />);
+    render(<SelectLocation />);
 
-    const optionsContainer = container.querySelector(
-      '.select-location__options',
-    );
-    if (optionsContainer) {
-      const style = window.getComputedStyle(optionsContainer);
-      expect(style.display).toBe('none');
+    const jakartaOption = screen.queryByText('Jakarta');
+    if (jakartaOption) {
+      expect(jakartaOption).not.toBeVisible();
+    } else {
+      expect(jakartaOption).not.toBeInTheDocument();
     }
   });
 
-  it('should show loading state when isLoading is true', () => {
+  it('should show loading message when searching', () => {
     vi.mocked(useGetLocationsHook.useGetLocations).mockReturnValue({
       data: [],
       isLoading: true,
@@ -76,24 +75,7 @@ describe('SelectLocation', () => {
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
-  it('should hide loading state when isLoading is false', () => {
-    vi.mocked(useGetLocationsHook.useGetLocations).mockReturnValue({
-      data: [],
-      isLoading: false,
-      error: null,
-    });
-
-    const { container } = render(<SelectLocation />);
-
-    const loadingElement = container.querySelector('.select-location__loading');
-    if (loadingElement) {
-      expect(loadingElement).toHaveStyle({ display: 'none' });
-    } else {
-      expect(loadingElement).toBeNull();
-    }
-  });
-
-  it('should update nameLike when user types in Textfield', async () => {
+  it('should allow users to type and see their input', async () => {
     const user = userEvent.setup();
     vi.mocked(useGetLocationsHook.useGetLocations).mockReturnValue({
       data: [],
@@ -111,12 +93,36 @@ describe('SelectLocation', () => {
     expect(input.value).toBe('jak');
   });
 
-  it('should call useGetLocations with updated nameLike', async () => {
+  it('should allow users to select a location option', async () => {
     const user = userEvent.setup();
-    const mockUseGetLocations = vi.mocked(useGetLocationsHook.useGetLocations);
+    const handleChange = vi.fn();
+    vi.mocked(useGetLocationsHook.useGetLocations).mockReturnValue({
+      data: [
+        { label: 'Jakarta', value: 1 },
+        { label: 'Bandung', value: 2 },
+      ],
+      isLoading: false,
+      error: null,
+    });
 
-    mockUseGetLocations.mockReturnValue({
-      data: [],
+    render(<SelectLocation onChange={handleChange} />);
+
+    const input = screen.getByPlaceholderText('Enter location');
+    await user.type(input, 'jak');
+
+    expect(screen.getByText('Jakarta')).toBeVisible();
+    expect(screen.getByText('Bandung')).toBeVisible();
+
+    await user.click(screen.getByText('Jakarta'));
+
+    expect(handleChange).toHaveBeenCalledWith('Jakarta', 1);
+    expect((input as HTMLInputElement).value).toBe('Jakarta');
+  });
+
+  it('should hide options from view when user clicks outside', async () => {
+    const user = userEvent.setup();
+    vi.mocked(useGetLocationsHook.useGetLocations).mockReturnValue({
+      data: [{ label: 'Jakarta', value: 1 }],
       isLoading: false,
       error: null,
     });
@@ -126,6 +132,10 @@ describe('SelectLocation', () => {
     const input = screen.getByPlaceholderText('Enter location');
     await user.type(input, 'jak');
 
-    expect(mockUseGetLocations).toHaveBeenCalled();
+    expect(screen.getByText('Jakarta')).toBeVisible();
+
+    await user.click(document.body);
+
+    expect(screen.getByText('Jakarta')).not.toBeVisible();
   });
 });
