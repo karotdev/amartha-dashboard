@@ -1,6 +1,8 @@
+import { EMPLOYMENT_TYPE_OPTIONS } from '../../../constants';
+import Select from '../../../components/ui/Select';
+import SelectLocation from '../select-location';
 import styles from './FieldDetail.module.css';
 import Textfield from '../../../components/ui/Textfield';
-import SelectLocation from '../select-location';
 
 const FieldDetail = () => {
   return (
@@ -11,9 +13,9 @@ const FieldDetail = () => {
         id="photo"
         placeholder="Enter photo"
       />
-      <Textfield
+      <Select
         label="Employment Type"
-        id="employment-type"
+        options={EMPLOYMENT_TYPE_OPTIONS}
         placeholder="Enter employment type"
       />
       <SelectLocation />

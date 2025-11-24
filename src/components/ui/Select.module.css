@@ -1,8 +1,14 @@
-.select-department {
+.select {
   position: relative;
 }
 
-.select-department__options {
+.select__textfield {
+  input {
+    cursor: pointer;
+  }
+}
+
+.select__options {
   background-color: var(--color-bg-base);
   border-radius: 16px;
   box-shadow: var(--shadow-md);
@@ -17,7 +23,7 @@
   z-index: 1000;
 }
 
-.select-department__option {
+.select__option {
   align-items: center;
   border-radius: 16px;
   color: var(--color-text-body);
@@ -27,24 +33,6 @@
   transition: background-color 0.2s ease-in-out;
 }
 
-.select-department__option:hover {
+.select__option:hover {
   background-color: var(--color-bg-raised);
 }
-
-.select-department__loading {
-  align-items: center;
-  background-color: var(--color-bg-base);
-  border-radius: 16px;
-  box-shadow: var(--shadow-md);
-  color: var(--color-text-body);
-  display: flex;
-  justify-content: center;
-  margin-top: 4px;
-  padding: 8px 16px;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 100%;
-  z-index: 1000;
-}
-

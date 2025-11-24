@@ -43,4 +43,73 @@ describe('Header', () => {
     const logoutLink = getByText('Logout').closest('a');
     expect(logoutLink).toHaveAttribute('href', '/logout');
   });
+
+  it('should close menu when clicking outside', () => {
+    const { getByText, container } = render(
+      <MemoryRouter>
+        <Header />
+      </MemoryRouter>,
+    );
+
+    fireEvent.click(getByText('Hi, Fajar!'));
+    const menu = container.querySelector('[class*="header-action__menu"]');
+    expect(menu).toBeInTheDocument();
+
+    fireEvent.mouseDown(document.body);
+    const style = window.getComputedStyle(menu as HTMLElement);
+    expect(style.display).toBe('none');
+  });
+
+  it('should not close menu when clicking inside the menu', () => {
+    const { getByText } = render(
+      <MemoryRouter>
+        <Header />
+      </MemoryRouter>,
+    );
+
+    fireEvent.click(getByText('Hi, Fajar!'));
+    const logoutLink = getByText('Logout');
+    expect(logoutLink).toBeInTheDocument();
+
+    fireEvent.mouseDown(logoutLink);
+    expect(getByText('Logout')).toBeInTheDocument();
+  });
+
+  it('should not close menu when clicking the button', () => {
+    const { getByText } = render(
+      <MemoryRouter>
+        <Header />
+      </MemoryRouter>,
+    );
+
+    const button = getByText('Hi, Fajar!');
+    fireEvent.click(button);
+    expect(getByText('Logout')).toBeInTheDocument();
+
+    fireEvent.mouseDown(button);
+    expect(getByText('Logout')).toBeInTheDocument();
+  });
+
+  it('should toggle menu when button is clicked multiple times', () => {
+    const { getByText, container } = render(
+      <MemoryRouter>
+        <Header />
+      </MemoryRouter>,
+    );
+
+    const button = getByText('Hi, Fajar!');
+    const menu = container.querySelector('[class*="header-action__menu"]');
+
+    fireEvent.click(button);
+    let style = window.getComputedStyle(menu as HTMLElement);
+    expect(style.display).not.toBe('none');
+
+    fireEvent.click(button);
+    style = window.getComputedStyle(menu as HTMLElement);
+    expect(style.display).toBe('none');
+
+    fireEvent.click(button);
+    style = window.getComputedStyle(menu as HTMLElement);
+    expect(style.display).not.toBe('none');
+  });
 });

@@ -57,7 +57,6 @@
 .header-action__menu {
   background-color: var(--color-bg-base);
   border-radius: 16px;
-  border: 1px solid var(--color-border);
   box-shadow: var(--shadow-md);
   margin-top: 4px;
   padding: 4px;
@@ -69,7 +68,6 @@
     align-items: center;
     border-radius: 16px;
     display: flex;
-    font-weight: var(--font-weight-bold);
     gap: 8px;
     padding: 8px 16px;
     &:hover {

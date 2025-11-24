@@ -78,19 +78,11 @@ export const WIZARD_STEPS_OPS: Step[] = [
   },
 ];
 
-export const ROLE_FORM_OPTIONS = [
-  'Ops',
-  'Admin',
-  'Engineer',
-  'Finance',
-] as const;
+export const ROLE_FORM_OPTIONS = ['Ops', 'Admin', 'Engineer', 'Finance'];
 
 export const EMPLOYMENT_TYPE_OPTIONS = [
   'Full-time',
   'Part-time',
   'Contract',
   'Intern',
-] as const;
-
-export type RoleFormOption = (typeof ROLE_FORM_OPTIONS)[number];
-export type EmploymentTypeOption = (typeof EMPLOYMENT_TYPE_OPTIONS)[number];
+];

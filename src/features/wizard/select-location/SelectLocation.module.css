@@ -1,0 +1,50 @@
+.select-location {
+  position: relative;
+}
+
+.select-location__options {
+  background-color: var(--color-bg-base);
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  margin-top: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 4px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  z-index: 1000;
+}
+
+.select-location__option {
+  align-items: center;
+  border-radius: 16px;
+  color: var(--color-text-body);
+  cursor: pointer;
+  display: flex;
+  padding: 8px 16px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.select-location__option:hover {
+  background-color: var(--color-bg-raised);
+}
+
+.select-location__loading {
+  align-items: center;
+  background-color: var(--color-bg-base);
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  color: var(--color-text-body);
+  display: flex;
+  justify-content: center;
+  margin-top: 4px;
+  padding: 8px 16px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  z-index: 1000;
+}
+

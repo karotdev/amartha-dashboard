@@ -8,15 +8,16 @@ interface TextfieldProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const Textfield = ({
   className,
-  label,
   id,
+  label,
   placeholder,
+  type = 'text',
   ...props
 }: TextfieldProps) => {
   return (
     <div className={cn(styles['textfield'], className ?? '')}>
       <label htmlFor={id}>{label}</label>
-      <input type="text" id={id} placeholder={placeholder} {...props} />
+      <input type={type} id={id} placeholder={placeholder} {...props} />
     </div>
   );
 };

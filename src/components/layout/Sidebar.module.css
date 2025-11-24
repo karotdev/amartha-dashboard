@@ -13,6 +13,7 @@
     right: 0;
     top: 0;
     transform: translateX(100%);
+    transition: transform 0.2s ease-in-out;
   }
   @media (min-width: 1024px) {
     height: calc(100svh - 126px);
@@ -23,7 +24,6 @@
 }
 
 .sidebar__content--open {
-  transition: transform 0.2s ease-in-out;
   transform: translateX(0);
 }
 

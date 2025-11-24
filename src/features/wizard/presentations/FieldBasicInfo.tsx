@@ -1,6 +1,8 @@
+import { ROLE_FORM_OPTIONS } from '../../../constants';
+import Select from '../../../components/ui/Select';
+import SelectDepartment from '../select-department';
 import styles from './FieldBasicInfo.module.css';
 import Textfield from '../../../components/ui/Textfield';
-import SelectDepartment from '../select-department';
 
 const FieldBasicInfo = () => {
   return (
@@ -13,11 +15,16 @@ const FieldBasicInfo = () => {
       <Textfield label="Email" id="email" placeholder="Enter email" />
       <SelectDepartment />
       <Textfield
+        readOnly
         label="Employee ID"
         id="employee-id"
         placeholder="Enter employee ID"
       />
-      <Textfield label="Role" id="role" placeholder="Enter role" />
+      <Select
+        label="Role"
+        options={ROLE_FORM_OPTIONS}
+        placeholder="Enter role"
+      />
     </div>
   );
 };
