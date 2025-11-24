@@ -38,6 +38,7 @@ describe('useSubmitEmployeesBasicInfo', () => {
       email: 'john.doe@example.com',
       departmentId: 4,
       role: 'Engineer',
+      submissionId: 'sub-1234567890',
     };
 
     vi.mocked(basicInfoService.createBasicInfo).mockResolvedValue(
@@ -66,6 +67,7 @@ describe('useSubmitEmployeesBasicInfo', () => {
       email: 'john.doe@example.com',
       departmentId: 4,
       role: 'Engineer',
+      submissionId: 'sub-1234567890',
     };
 
     const error = new Error('Failed to submit basic info');

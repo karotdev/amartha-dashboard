@@ -72,7 +72,7 @@ const FieldBasicInfo = ({
         placeholder="Enter role"
         value={watch('role')}
         onChange={onRoleChange}
-        onBlur={() => register('role').onBlur()}
+        onBlur={() => register('role').onBlur({ target: { name: 'role' } })}
         error={errors.role?.message}
       />
     </div>

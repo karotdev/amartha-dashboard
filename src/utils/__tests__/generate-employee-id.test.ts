@@ -24,6 +24,7 @@ describe('generateEmployeeId', () => {
           email: 'john@example.com',
           departmentId: 1,
           role: 'admin',
+          submissionId: 'sub-1234567890',
         },
       ];
 
@@ -45,6 +46,7 @@ describe('generateEmployeeId', () => {
           email: 'john@example.com',
           departmentId: 1,
           role: 'admin',
+          submissionId: 'sub-1234567890',
         },
         {
           id: 2,
@@ -53,6 +55,7 @@ describe('generateEmployeeId', () => {
           email: 'jane@example.com',
           departmentId: 1,
           role: 'admin',
+          submissionId: 'sub-1234567891',
         },
       ];
 
@@ -117,6 +120,7 @@ describe('generateEmployeeId', () => {
           email: 'john@example.com',
           departmentId: 1,
           role: 'admin',
+          submissionId: 'sub-1234567890',
         },
         {
           id: 2,
@@ -125,6 +129,7 @@ describe('generateEmployeeId', () => {
           email: 'jane@example.com',
           departmentId: 2,
           role: 'admin',
+          submissionId: 'sub-1234567891',
         },
         {
           id: 3,
@@ -133,6 +138,7 @@ describe('generateEmployeeId', () => {
           email: 'bob@example.com',
           departmentId: 1,
           role: 'admin',
+          submissionId: 'sub-1234567892',
         },
       ];
 
@@ -154,6 +160,7 @@ describe('generateEmployeeId', () => {
           email: 'john@example.com',
           departmentId: 1,
           role: 'admin',
+          submissionId: 'sub-1234567890',
         },
       ];
 
@@ -198,6 +205,7 @@ describe('generateEmployeeId', () => {
           email: `employee${i + 1}@example.com`,
           departmentId: 1,
           role: 'admin',
+          submissionId: `sub-${i + 1}`,
         }),
       );
 
@@ -231,6 +239,7 @@ describe('generateEmployeeId', () => {
           email: 'john@example.com',
           departmentId: 1,
           role: 'admin',
+          submissionId: 'sub-1234567890',
         },
         {
           id: 2,
@@ -239,6 +248,7 @@ describe('generateEmployeeId', () => {
           email: 'jane@example.com',
           departmentId: 1,
           role: 'admin',
+          submissionId: 'sub-1234567891',
         },
       ];
 
@@ -260,6 +270,7 @@ describe('generateEmployeeId', () => {
           email: 'john@example.com',
           departmentId: 1,
           role: 'admin',
+          submissionId: 'sub-1234567890',
         },
         {
           id: 2,
@@ -268,6 +279,7 @@ describe('generateEmployeeId', () => {
           email: 'jane@example.com',
           departmentId: 1,
           role: 'admin',
+          submissionId: 'sub-1234567891',
         },
       ];
 

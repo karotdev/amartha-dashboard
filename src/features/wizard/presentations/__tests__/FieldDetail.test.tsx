@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { useForm } from 'react-hook-form';
 import FieldDetail from '../FieldDetail';
 import { vi } from 'vitest';
-import type { DetailsInput } from '../../../schemas/details.schema';
+import type { DetailsInput } from '../../../../schemas/details.schema';
 
 vi.mock('../../select-location', () => ({
   default: ({ ...props }: { label?: string }) => (

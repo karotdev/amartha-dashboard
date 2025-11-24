@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { useForm } from 'react-hook-form';
 import FieldBasicInfo from '../FieldBasicInfo';
 import { vi } from 'vitest';
-import type { BasicInfoInput } from '../../../schemas/basic-info.schema';
+import type { BasicInfoInput } from '../../../../schemas/basic-info.schema';
 
 vi.mock('../../select-department', () => ({
   default: ({ ...props }: { label?: string }) => (

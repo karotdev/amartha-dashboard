@@ -38,6 +38,7 @@ describe('useSubmitEmployeesDetails', () => {
       employmentType: 'Full-time',
       locationId: 1,
       notes: 'Test notes',
+      submissionId: 'sub-1234567890',
     };
 
     vi.mocked(detailsService.createDetails).mockResolvedValue(mockDetails);
@@ -64,6 +65,7 @@ describe('useSubmitEmployeesDetails', () => {
       employmentType: 'Full-time',
       locationId: 1,
       notes: 'Test notes',
+      submissionId: 'sub-1234567890',
     };
 
     const error = new Error('Failed to submit details');

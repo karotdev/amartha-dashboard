@@ -110,13 +110,13 @@ const FieldDetail = ({
         placeholder="Enter employment type"
         value={watch('employmentType')}
         onChange={onEmploymentTypeChange}
-        onBlur={() => register('employmentType').onBlur()}
+        onBlur={() => register('employmentType').onBlur({ target: { name: 'employmentType' } })}
         error={errors.employmentType?.message}
       />
       <SelectLocation
         value={locationValue}
         onChange={onLocationChange}
-        onBlur={() => register('locationId').onBlur()}
+        onBlur={() => register('locationId').onBlur({ target: { name: 'locationId' } })}
         error={errors.locationId?.message}
       />
       <Textfield
