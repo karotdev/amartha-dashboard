@@ -129,6 +129,7 @@ describe('details service', () => {
       employmentType: 'Full-time',
       locationId: 1,
       notes: 'Test notes',
+      submissionId: 'sub-1234567890',
     };
 
     it('should create details with valid data', async () => {
@@ -208,7 +209,7 @@ describe('details service', () => {
       });
     });
 
-    it('should use empty string as default for notes when not provided', async () => {
+    it('should allow notes to be omitted when not provided', async () => {
       globalThis.fetch = vi.fn().mockResolvedValue({
         ok: true,
         json: async () => mockDetails,
@@ -218,6 +219,7 @@ describe('details service', () => {
         photo: validInput.photo,
         employmentType: validInput.employmentType,
         locationId: validInput.locationId,
+        submissionId: validInput.submissionId,
       };
 
       await createDetails(inputWithoutNotes);
@@ -227,10 +229,7 @@ describe('details service', () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          ...inputWithoutNotes,
-          notes: '',
-        }),
+        body: JSON.stringify(inputWithoutNotes),
       });
     });
 

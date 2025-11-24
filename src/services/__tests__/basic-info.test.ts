@@ -136,6 +136,7 @@ describe('basic-info service', () => {
       email: 'john.doe@example.com',
       departmentId: 4,
       role: 'Engineer',
+      submissionId: 'sub-1234567890',
     };
 
     it('should create basic info with valid data', async () => {
