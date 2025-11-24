@@ -1,8 +1,8 @@
 import { departmentsResponseSchema } from '../schemas/departments.schema';
 import type { DepartmentsResponse } from '../schemas/departments.schema';
+import { API_STEP1_URL } from '../config/api';
 
-const API_BASE_URL = 'http://localhost:4001';
-export const DEPARTMENTS_ENDPOINT = `${API_BASE_URL}/departments`;
+export const DEPARTMENTS_ENDPOINT = `${API_STEP1_URL}/departments`;
 
 export const getDepartments = async (
   nameLike?: string,

@@ -9,8 +9,9 @@ import type {
   DetailsResponseArray,
 } from '../schemas/details.schema';
 
-const API_BASE_URL = 'http://localhost:4002';
-export const DETAILS_ENDPOINT = `${API_BASE_URL}/details`;
+import { API_STEP2_URL } from '../config/api';
+
+export const DETAILS_ENDPOINT = `${API_STEP2_URL}/details`;
 
 export const getDetails = async (
   page?: number,

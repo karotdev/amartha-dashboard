@@ -9,8 +9,9 @@ import type {
   BasicInfoResponseArray,
 } from '../schemas/basic-info.schema';
 
-const API_BASE_URL = 'http://localhost:4001';
-export const BASIC_INFO_ENDPOINT = `${API_BASE_URL}/basicInfo`;
+import { API_STEP1_URL } from '../config/api';
+
+export const BASIC_INFO_ENDPOINT = `${API_STEP1_URL}/basicInfo`;
 
 export const getBasicInfo = async (
   page?: number,
