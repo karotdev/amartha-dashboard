@@ -3,20 +3,21 @@ import styles from './Textfield.module.css';
 import type { InputHTMLAttributes } from 'react';
 
 interface TextfieldProps extends InputHTMLAttributes<HTMLInputElement> {
-  label: string;
+  label?: string;
 }
 
 const Textfield = ({
   className,
-  label,
   id,
+  label,
   placeholder,
+  type = 'text',
   ...props
 }: TextfieldProps) => {
   return (
     <div className={cn(styles['textfield'], className ?? '')}>
-      <label htmlFor={id}>{label}</label>
-      <input type="text" id={id} placeholder={placeholder} {...props} />
+      {label && <label htmlFor={id}>{label}</label>}
+      <input type={type} id={id} placeholder={placeholder} {...props} />
     </div>
   );
 };

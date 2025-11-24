@@ -17,4 +17,38 @@ const FormLayoutActions = ({ children }: PropsWithChildren<unknown>) => {
   return <div className={styles['form-layout__actions']}>{children}</div>;
 };
 
-export { FormLayout, FormLayoutHeader, FormLayoutContent, FormLayoutActions };
+const FormLayoutSection = ({
+  title,
+  children,
+}: PropsWithChildren<{ title: string }>) => {
+  return (
+    <div className={styles['form-layout__section']}>
+      <p className={styles['form-layout__section-title']}>{title}</p>
+      <div>{children}</div>
+    </div>
+  );
+};
+
+const FormLayoutTitle = ({
+  title,
+  description,
+}: {
+  title: string;
+  description: string;
+}) => {
+  return (
+    <div>
+      <p className={styles['form-layout__title']}>{title}</p>
+      <p>{description}</p>
+    </div>
+  );
+};
+
+export {
+  FormLayout,
+  FormLayoutHeader,
+  FormLayoutContent,
+  FormLayoutActions,
+  FormLayoutSection,
+  FormLayoutTitle,
+};

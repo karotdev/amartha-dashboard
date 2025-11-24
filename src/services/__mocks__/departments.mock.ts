@@ -1,0 +1,8 @@
+import type { DepartmentsResponse } from '../../schemas/departments.schema';
+
+export const mockDepartments: DepartmentsResponse = [
+  { id: 1, name: 'Lending' },
+  { id: 2, name: 'Funding' },
+  { id: 3, name: 'Operations' },
+  { id: 4, name: 'Engineering' },
+];

@@ -1,14 +1,17 @@
+import { FormLayoutTitle } from '../wizard/presentations/FormLayout';
+import { Link } from 'react-router-dom';
 import { PlusIcon } from 'lucide-react';
-import FormTitle from '../wizard/presentations/FormTitle';
 import PageLayout from '../../components/layout/PageLayout';
 import styles from './Employees.module.css';
-import { Link } from 'react-router-dom';
 
 const EmployeesPage = () => {
   return (
     <PageLayout>
       <div className={styles['employees-page']}>
-        <FormTitle title="Employees" description="Manage your employees" />
+        <FormLayoutTitle
+          title="Employees"
+          description="Manage your employees"
+        />
         <div className={styles['employees-page__content']}>
           <div className={styles['employees-page__content-header']}>
             <Link

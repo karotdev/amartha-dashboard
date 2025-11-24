@@ -77,3 +77,12 @@ export const WIZARD_STEPS_OPS: Step[] = [
     dataTestId: 'step-details',
   },
 ];
+
+export const ROLE_FORM_OPTIONS = ['Ops', 'Admin', 'Engineer', 'Finance'];
+
+export const EMPLOYMENT_TYPE_OPTIONS = [
+  'Full-time',
+  'Part-time',
+  'Contract',
+  'Intern',
+];

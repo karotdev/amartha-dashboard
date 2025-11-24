@@ -5,16 +5,16 @@ import styles from './Stepper.module.css';
 import type { Step } from '../../types';
 
 interface StepperProps {
-  completedSteps: Set<number>;
-  currentStep: number;
-  steps: Step[];
-  onStepClick: (stepIndex: number) => void;
+  completedSteps?: Set<number>;
+  currentStep?: number;
+  steps?: Step[];
+  onStepClick?: (stepIndex: number) => void;
 }
 
 const Stepper = ({
-  completedSteps,
-  currentStep,
-  steps,
+  completedSteps = new Set(),
+  currentStep = 0,
+  steps = [],
   onStepClick,
 }: StepperProps) => {
   const isStepAccessible = (stepIndex: number) => {
@@ -36,7 +36,7 @@ const Stepper = ({
             className={styles['stepper__step']}
             disabled={!isAccessible}
             data-testid={step.dataTestId}
-            onClick={() => onStepClick(index)}
+            onClick={() => onStepClick?.(index)}
           >
             <span
               className={cn(
